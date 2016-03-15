@@ -14,12 +14,16 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './app/reducers/rootReducer.js';
 import Map from './app/components/Map.js';
+import AR from './app/components/AR.js';
 var store = createStore(rootReducer);
 
 class findAR extends Component {
   render() {
     return (
-      <Map/>
+      <View>
+        <AR />
+        <Map />
+      </View>
     );
   }
 }
