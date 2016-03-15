@@ -1,4 +1,4 @@
-import React, { AppRegistry, Component, StyleSheet, Dimensions, View } from 'react-native';
+import React, { Component, StyleSheet, Dimensions, View } from 'react-native';
 import Camera from 'react-native-camera';
 
 export default class AR extends Component {
@@ -32,5 +32,3 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
   },
 });
-
-AppRegistry.registerComponent('AR', () => AR);

@@ -21,8 +21,8 @@ class findAR extends Component {
   render() {
     return (
       <View>
-        <AR/>
-        <Map/>
+        <AR />
+        <Map />
       </View>
     );
   }
