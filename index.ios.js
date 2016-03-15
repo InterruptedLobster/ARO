@@ -27,9 +27,10 @@ class findAR extends Component {
   render() {
     const menu = <Menu onItemSelected={this.onMenuItemSelected} navigator={navigator}/>;
     return (
-      <Provider store= {store}>
+      <Provider store={store}>
         <SideMenu menu={menu}>
-          <ViewContainer/>
+          <ViewContainer>
+          </ViewContainer>
         </SideMenu>
       </Provider>
     );

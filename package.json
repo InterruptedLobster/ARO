@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "react-native": "^0.21.0",
+    "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
     "react-native-side-menu": "^0.18.0",
     "react-redux": "^4.4.1",
     "redux": "^3.3.1"

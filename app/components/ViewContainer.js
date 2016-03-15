@@ -1,4 +1,5 @@
-import React, { Component, PropTypes  } from 'react-native';
+import React, { Component, PropTypes, View } from 'react-native';
+import AR from './AR.js';
 import Map from './Map.js';
 
 export default class ViewContainer extends Component {
@@ -10,7 +11,10 @@ export default class ViewContainer extends Component {
   }
   render() {
     return (
-      <Map/>
+      <View>
+        <AR/>
+        <Map/>
+      </View>
     );
   }
 }

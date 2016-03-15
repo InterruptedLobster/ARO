@@ -8,7 +8,7 @@ export default class Map extends Component {
   }
   render() {
     return (
-     <View style={styles.container}>
+     <View style={[styles.container, { backgroundColor: 'transparent'}]}>
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
@@ -32,13 +32,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   welcome: {
+    color: 'white',
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
   },
   instructions: {
+    color: 'white',
     textAlign: 'center',
-    color: '#333333',
     marginBottom: 5,
   },
 });
