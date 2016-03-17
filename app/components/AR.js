@@ -1,6 +1,11 @@
 import React, { Component, StyleSheet, Dimensions, View } from 'react-native';
 import Camera from 'react-native-camera';
 import WebViewBridge from 'react-native-webview-bridge';
+import THREE_RENDER_MARKER from '../lib/threejs/marker.js';
+import HANDLE_ORIENTATION from '../lib/orientation/orientationHandler.js';
+import Location from '../lib/orientation/locationMath.js';
+
+const REF_WEBVIEW_BRIDGE = 'webviewbridge';
 
 const WEBVIEW_STYLE = `
   body {
@@ -12,119 +17,18 @@ const WEBVIEW_STYLE = `
   }
 `;
 
-const THREE_RENDER_MARKER = `
-  <script>
-    var camera, scene, renderer;
-    var mesh;
-    var hemiLight;
-
-    init();
-    animate();
-
-    function init() {
-
-      /* CAMERA */
-
-      camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 5280 );
-
-      scene = new THREE.Scene();
-
-      /* LIGHTS */
-      hemiLight = new THREE.HemisphereLight( 0x2194ce, 0x2194ce, 1.25 );
-      hemiLight.groundColor.setHSL( 0.6, 1, 0.6 );
-      hemiLight.color.setHSL( 0.095, 1, 1.0 );
-      hemiLight.position.set( 0, 500, 0 );
-      scene.add( hemiLight );
-
-      /* MARKER */
-
-      var geometry = new THREE.Geometry();
-
-      var height = 10;
-      var heightsplit = .75
-      var width = 4;
-
-      geometry.vertices.push(
-        new THREE.Vector3( 0, 0, 0 ),
-        new THREE.Vector3( width/2, height * heightsplit, 0 ),
-        new THREE.Vector3( 0, height * heightsplit, -1 * width/2 ),
-        new THREE.Vector3( -1 * width/2, height * heightsplit, 0 ),
-        new THREE.Vector3( 0, height * heightsplit, width/2 ),
-        new THREE.Vector3( 0, height, 0 )
-      );
-
-      geometry.faces.push(
-        new THREE.Face3( 0, 1, 2 ),
-        new THREE.Face3( 0, 2, 3 ),
-        new THREE.Face3( 0, 3, 4 ),
-        new THREE.Face3( 4, 1, 0 ),
-        new THREE.Face3( 5, 2, 1 ),
-        new THREE.Face3( 5, 3, 2 ),
-        new THREE.Face3( 4, 3, 5 ),
-        new THREE.Face3( 1, 4, 5 )
-      );
-
-      geometry.computeFaceNormals();
-      geometry.computeVertexNormals();
-
-      geometry.computeBoundingBox();
-
-      var material = new THREE.MeshPhongMaterial( { specular: 0x111111, color: 0xffffff, shininess: 100, shading: THREE.FlatShading, side: THREE.FrontSide } );
-
-      mesh = new THREE.Mesh( geometry, material );
-      scene.add( mesh );
-
-      mesh.position.z = -50;
-
-      /* RENDER SCENE */
-
-      renderer = new THREE.WebGLRenderer();
-      renderer.setPixelRatio( window.devicePixelRatio );
-      renderer.setSize( window.innerWidth, window.innerHeight );
-      
-      document.body.appendChild( renderer.domElement );
-
-      window.addEventListener( 'resize', onWindowResize, false );
-
-    }
-
-    function onWindowResize() {
-
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-
-      renderer.setSize( window.innerWidth, window.innerHeight );
-
-    }
-
-    function animate() {
-
-      requestAnimationFrame( animate );
-
-      render();
-
-    }
-
-    function render() {
-
-      mesh.rotation.y += 0.01;
-
-      renderer.render( scene, camera );
-
-    }
-  </script>
-`;
-
 const WEBVIEW_SCRIPTS = `
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r74/three.min.js"></script>
   ${ THREE_RENDER_MARKER }
+  ${ HANDLE_ORIENTATION }
 `;
 
 const HTML = `
 <!DOCTYPE html>\n
 <html>
   <head>
-    <title>Hello Static World</title>
+    <title>findAR WebView</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=320, user-scalable=no">
     <style type="text/css">
@@ -132,6 +36,7 @@ const HTML = `
     </style>
   </head>
   <body>
+    <p id="alpha"></p>
     ${ WEBVIEW_SCRIPTS }
   </body>
 </html>
@@ -139,7 +44,7 @@ const HTML = `
 
 const BRIDGE_INJECT_SCRIPT = `
   function webViewBridgeReady(cb) {
-    //checks whether WebViewBirdge exists in global scope.
+    //checks whether WebViewBridge exists in global scope.
     if (window.WebViewBridge) {
       cb(window.WebViewBridge);
       return;
@@ -158,11 +63,26 @@ const BRIDGE_INJECT_SCRIPT = `
     document.addEventListener('WebViewBridge', handler, false);
   }
 
-  webViewBridgeReady(function (webViewBridge) {
+  webViewBridgeReady( function (webViewBridge) {
+    webViewBridge.send( "BRIDGE_READY" );
     webViewBridge.onMessage = function (message) {
-      mesh.position.x = parseInt( JSON.parse( message ).x );
+      // Message is an array of all of the pins we want to display,
+      // where x and z on each pin is the relative location to the
+      // device in feet.
+      var locs = JSON.parse( message );
 
-      // webViewBridge.send("message from webview");
+      mesh.visible = false;
+
+      locs.forEach( function( loc, i ) {
+        if( !( meshes[i] instanceof THREE.Mesh ) ) {
+          meshes[i] = mesh.clone();
+          meshes[i].visible = true;
+          scene.add( meshes[i] );
+        }
+        meshes[i].position.x = loc.x;
+        meshes[i].position.z = loc.z;
+      });
+      // TODO: Delete any meshes in indices greater than or equal to locs.length;
     };
   });
 `;
@@ -171,6 +91,31 @@ export default class AR extends Component {
   constructor(props) {
     super(props);
   }
+
+
+  calculateLocs( currentLocation, arrayOfPins ) {
+
+    var locs = [];
+
+    // For each pin in the array of pins,
+      // Calculate the relative x and z ( where -x is west, x is east, -z is north, and z is south )
+      // Each unit being a foot.
+
+    arrayOfPins.forEach( function( pin ) {
+      locs.push( Location.relativeLocsInFeet( currentLocation, pin ) );
+    });
+
+    return locs;
+  }
+
+  onBridgeMessage( message ) {
+    if( message === "BRIDGE_READY" ) {
+      var locs = JSON.stringify( this.calculateLocs( this.props.currLoc, this.props.locs ) );
+      this.refs.webviewbridge.sendToBridge( locs );
+    }
+  }
+
+  // TODO: When we receive a new state, we should recalculate the rendered pins and send them to the webview.
 
   render() {
     return (
@@ -184,10 +129,11 @@ export default class AR extends Component {
         </Camera>
         <View style={styles.webviewcont}>
           <WebViewBridge 
-            ref="webviewbridge"
+            ref={ REF_WEBVIEW_BRIDGE }
             automaticallyAdjustContentInsets={true}
             source={{ html: HTML }}
             style={styles.webView}
+            onBridgeMessage={this.onBridgeMessage.bind(this)}
             injectedJavaScript={ BRIDGE_INJECT_SCRIPT }
             javaScriptEnabled={true}
             scalesPageToFit={true}
