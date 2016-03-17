@@ -1,0 +1,9 @@
+{
+  "firebase": "interruptedlobster",
+  "public": "public",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

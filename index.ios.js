@@ -15,10 +15,21 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './app/reducers/rootReducer.js';
 import ViewContainer from './app/components/ViewContainer.js';
 import Menu from './app/components/Menu.js';
-
+import thunk from 'redux-thunk';
+import createLogger from 'redux-logger';
+import promise from 'redux-promise';
 const SideMenu = require('react-native-side-menu');
 
-var store = createStore(rootReducer);
+
+//creates logger
+const logger = createLogger();
+// creates store
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk, promise, logger)
+);
+
+const Firebase = require('firebase');
 
 class findAR extends Component {
   onMenuItemSelected () {
