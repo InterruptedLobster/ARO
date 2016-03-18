@@ -28,12 +28,10 @@ export default class Map extends Component {
     return _.map(pins.pins, (pinObject) => {
 
       return (
-
         <MapView.Marker
           image={image}
           key={pinObject.id}
-          coordinate={{latitude: pinObject.latitude, longitude: pinObject.longitude}}
-        >
+          coordinate={{latitude: pinObject.latitude, longitude: pinObject.longitude}}>
           <MapView.Callout tooltip>
             <PinCallout>
               <Text style={{ color: 'black', alignSelf:'center', fontSize:16 }}>{pinObject.title}</Text>
@@ -57,7 +55,6 @@ export default class Map extends Component {
             latitudeDelta: 0.00922,
             longitudeDelta: 0.00421
           }}
-          // onRegionChange={this.onRegionChange.bind(this)}
           style={styles.map}
           showsCompass={true}
           onLongPress={
