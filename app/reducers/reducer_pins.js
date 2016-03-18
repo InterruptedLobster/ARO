@@ -1,9 +1,9 @@
 import {PIN_MAP, DROP_NEW_PIN} from '../constants/constants.js';
 
 const testArray = [
-  { title: 'AWS', latitude: 37.783278, longitude: -122.4084808 },           // AWS
-  { title: 'Punjab', latitude: 37.7840612, longitude: -122.4093445 },       // Punjab
-  { title: 'Hack Reactor', latitude: 37.7835551, longitude: -122.4089013 }, // Hack Reactor
+  { id: 0, title: 'AWS', latitude: 37.783278, longitude: -122.4084808 },           // AWS
+  { id: 1, title: 'Punjab', latitude: 37.7840612, longitude: -122.4093445 },       // Punjab
+  { id: 2, title: 'Hack Reactor', latitude: 37.7835551, longitude: -122.4089013 }, // Hack Reactor
 ];
 
 const initialState = {
