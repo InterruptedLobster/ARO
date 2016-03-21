@@ -15,6 +15,11 @@ export default class ViewContainer extends Component {
       isFollowingUser: true,
     };
   }
+  componentWillMount() {
+    const { getPins } = this.props;
+    getPins();
+  }
+
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -45,12 +50,11 @@ export default class ViewContainer extends Component {
         // <AR currLoc={ this.state.currLoc } pins= { pins } />
 
   render() {
-    const {getLocationToSave, getPins, pins} = this.props;
+    const {getLocationToSave, pins} = this.props;
     return (
       <View>
         <Map
           dropPin={getLocationToSave}
-          getPins={getPins}
           currLoc={this.state.currLoc}
           pins = {pins}
           initialLoc={this.state.initialLoc}

@@ -13,10 +13,6 @@ export default class Map extends Component {
       position: null,
     };
   }
-  componentWillMount() {
-    const { getPins } = this.props;
-    getPins();
-  }
   onRegionChange(region) {
     this.setState({ position: region });
   }
