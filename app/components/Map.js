@@ -13,7 +13,6 @@ export default class Map extends Component {
     };
   }
   componentWillMount() {
-    // console.log('this is pins props!', this.props.pins[3]);
     const { getPins } = this.props;
     getPins();
   }
@@ -23,7 +22,6 @@ export default class Map extends Component {
   renderMarkers() {
     const { pins } = this.props;
     return _.map(pins, (pinObject, key) => {
-      // console.log(pinObject, 'this is object id upon rendering marker!!!')
       return (
 
         <MapView.Marker
