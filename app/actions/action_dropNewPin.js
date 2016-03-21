@@ -27,8 +27,8 @@ export default function getLocationToSave(location) {
                   // userData.child(key).update({
                   //   id: key
                   // });
-                  dispatch(dropNewPin(coords, currentId));
                 });
+                dispatch(dropNewPin(coords, currentId));
               });
 
           },
@@ -50,8 +50,8 @@ export default function getLocationToSave(location) {
             // userData.child(key).update({
             //   id: key
             // });
-            dispatch(dropNewPin(coords, currentId));
           });
+          dispatch(dropNewPin(coords, currentId));
         });
       }
     };
