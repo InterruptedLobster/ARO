@@ -24,7 +24,7 @@ export default class Map extends Component {
   renderMarkers() {
     const { pins } = this.props;
     return _.map(pins, (pinObject, key) => {
-      // console.log(pinObject.id, 'this is object id upon rendering marker!!!')
+      console.log(pinObject, 'this is object id upon rendering marker!!!')
       return (
 
         <MapView.Marker

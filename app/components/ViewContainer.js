@@ -42,8 +42,8 @@ export default class ViewContainer extends Component {
       }
     );
   }
+        // <AR currLoc={ this.state.currLoc } pins= { pins } />
 
-        // <AR currLoc={ this.state.currLoc } pins={ this.props.pins.pins } />
   render() {
     const {getLocationToSave, getPins, pins} = this.props;
     return (
@@ -57,9 +57,7 @@ export default class ViewContainer extends Component {
           isFollowingUser={this.state.isFollowingUser}
 
         />
-
         <DropNewPinButton/>
-
       </View>
     );
   }

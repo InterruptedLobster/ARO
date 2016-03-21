@@ -14,7 +14,7 @@ export default function(state = initialState, action) {
   switch(action.type) {
     case UPDATE_PINS:
       return Object.assign({}, state,
-        action.id = action.payload
+         action.payload
       );
     case DROP_NEW_PIN:
       return Object.assign({}, state,
@@ -24,3 +24,5 @@ export default function(state = initialState, action) {
       return state;
   }
 }
+
+// state.pins = {{},{},{}}
