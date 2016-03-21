@@ -4,7 +4,7 @@ import WebViewBridge from 'react-native-webview-bridge';
 import THREE_RENDER_MARKER from '../lib/threejs/marker.js';
 import HANDLE_ORIENTATION from '../lib/orientation/orientationHandler.js';
 import Location from '../lib/orientation/locationMath.js';
-
+import _ from 'underscore';
 const REF_WEBVIEW_BRIDGE = 'webviewbridge';
 
 const WEBVIEW_STYLE = `
@@ -94,7 +94,7 @@ export default class AR extends Component {
   }
 
 
-  calculateLocs( currentLocation, arrayOfPins ) {
+  calculateLocs( currentLocation, objectOfPins ) {
 
     var locs = [];
 
@@ -104,7 +104,7 @@ export default class AR extends Component {
 
 
 
-    arrayOfPins.forEach( function( pin ) {
+    _.each( objectOfPins, function( pin ) {
       locs.push( Location.relativeLocsInFeet( currentLocation, pin ) );
     });
 

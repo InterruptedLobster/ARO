@@ -22,18 +22,17 @@ export default class Map extends Component {
   }
   renderMarkers() {
     const { pins } = this.props;
-    return _.map(pins.pins, (pinObject) => {
-      // console.log(pinObject.id, 'this is object id upon rendering marker!!!')
+    return _.map(pins, (pinObject, key) => {
       return (
 
         <MapView.Marker
           image={image}
-          key={pinObject.id}
+          key={key}
           coordinate={{latitude: pinObject.latitude, longitude: pinObject.longitude}}
         >
           <MapView.Callout tooltip>
             <PinCallout>
-              <Text style={{ color: 'black', alignSelf:'center', fontSize:16 }}>pinId: {pinObject.id}</Text>
+              <Text style={{ color: 'black', alignSelf:'center', fontSize:16 }}>pinId: {key}</Text>
             </PinCallout>
           </MapView.Callout>
 
@@ -88,9 +87,7 @@ export default class Map extends Component {
           }
         >
 
-
-        {Object.keys(pins.pins).length !== 0 ? this.renderMarkers.call(this) : void 0 }
-
+        {Object.keys(pins).length !== 0 ? this.renderMarkers.call(this) : void 0 }
         </MapView>
         <Button
           onPress={this.moveMapToUser.bind(this, this.props.fullLoc)}>
