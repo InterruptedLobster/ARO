@@ -15,6 +15,7 @@ export default function() {
       var key = savedPin.key();
       fetchedPins[key]=savedPin.val();
     });
+    console.log('this is fetchedPins', fetchedPins);
     dispatch(updatePins(fetchedPins));
   });
  };
