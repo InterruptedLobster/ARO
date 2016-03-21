@@ -9,8 +9,8 @@ export default class ViewContainer extends Component {
     this.state = {
       view: 'map',
       currLoc: {
-        latitude: 37.78825,
-        longitude: -122.4324,
+        latitude: 37.7835551,
+        longitude: -122.4089013,
       },
       isFollowingUser: true,
     };
@@ -36,9 +36,9 @@ export default class ViewContainer extends Component {
         var coords = {};
         coords.longitude = position.coords.longitude;
         coords.latitude = position.coords.latitude;
-        this.setState({
-          currLoc: coords
-        });
+        // this.setState({
+        //   currLoc: coords
+        // });
       }
     );
   }

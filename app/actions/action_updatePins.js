@@ -10,9 +10,10 @@ function updatePins(allPins) {
 export default function() {
  return (dispatch) => {
   userData.once("value", function(snap) {
-    var fetchedPins = [];
+    var fetchedPins = {};
     snap.forEach(function(savedPin) {
-      fetchedPins.push(savedPin.val());
+      var key = savedPin.key();
+      fetchedPins[key]=savedPin.val();
     });
     dispatch(updatePins(fetchedPins));
   });
