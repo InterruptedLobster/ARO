@@ -19,7 +19,6 @@ export default function(state = initialState, action) {
     case DROP_NEW_PIN:
       let newPin = {};
       newPin[action.id] = action.payload;
-      console.log('this is new pin in reducer!!------', newPin)
       return Object.assign({}, state,
         newPin
       );
