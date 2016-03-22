@@ -8,14 +8,6 @@ import { connect } from 'react-redux';
 import { userData } from '../lib/db/db.js';
 
 class DropNewPinButton extends Component {
-  constructor(props) {
-    super(props);
-    this.state= {
-     long: null,
-     lat: null,
-     title: ''
-    };
-  }
 
   handleClick() {
     const { getLocationToSave, recent } = this.props;
