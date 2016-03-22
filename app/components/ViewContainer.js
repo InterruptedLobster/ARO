@@ -41,9 +41,6 @@ export default class ViewContainer extends Component {
         var coords = {};
         coords.longitude = position.coords.longitude;
         coords.latitude = position.coords.latitude;
-        // this.setState({
-        //   currLoc: coords
-        // });
       }
     );
   }
@@ -53,7 +50,6 @@ export default class ViewContainer extends Component {
     const {getLocationToSave, pins} = this.props;
     return (
       <View>
-        <AR currLoc={ this.state.currLoc } pins={ this.props.pins.pins } />
         <Map
           dropPin={getLocationToSave}
           currLoc={this.state.currLoc}
