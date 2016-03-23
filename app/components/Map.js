@@ -87,7 +87,7 @@ export default class Map extends Component {
         </MapView>
         <Button
           onPress={this.moveMapToUser.bind(this, this.props.fullLoc)}>
-          CENTER ON ME
+          Center on me!
         </Button>
       </View>
     )

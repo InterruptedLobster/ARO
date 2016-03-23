@@ -1,5 +1,5 @@
 //this should add ownprops from parent map
-import React, { Component } from 'react-native';
+import React, { Component, StyleSheet } from 'react-native';
 import getLocationToSave from '../actions/action_dropNewPin.js';
 
 import Button from 'react-native-button';
@@ -18,7 +18,7 @@ class DropNewPinButton extends Component {
   render() {
     return (
       <Button
-        style={{borderWidth: 1, borderColor: 'blue'}}
+        style={styles.button}
         onPress={this.handleClick.bind(this)}>
         Drop New Pin!
       </Button>
@@ -34,3 +34,15 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { getLocationToSave })(DropNewPinButton);
+
+var styles = StyleSheet.create({
+   button: {
+    padding:6,
+    backgroundColor: '#97B8BD',
+    flexWrap:'wrap',
+    alignSelf:'center',
+    width:225,
+    marginBottom:10,
+    borderRadius:5
+  }
+})
