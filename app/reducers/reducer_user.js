@@ -1,6 +1,10 @@
 import {SIGN_UP, LOG_IN, LOG_OUT} from '../constants/constants.js';
 
-var initialState = {};
+const initialState = {
+  username: null,
+  token: null,
+  error: null
+};
 
 export default function(state = initialState, action) {
   switch(action.type){
@@ -13,9 +17,7 @@ export default function(state = initialState, action) {
         action.payload
         );
     case LOG_OUT:
-      return Object.assign({}, state,
-        action.payload
-        );
+      return initialState;
     default:
       return state;
   }
