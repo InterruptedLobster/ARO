@@ -1,6 +1,7 @@
 package com.findar;
 
 import com.facebook.react.ReactActivity;
+import com.magus.fblogin.FacebookLoginPackage;
 import com.github.alinz.reactnativewebviewbridge.WebViewBridgePackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.AirMaps.AirPackage;
@@ -38,6 +39,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new FacebookLoginPackage(),
             new WebViewBridgePackage(),
             new RCTCameraPackage(),
             new AirPackage()

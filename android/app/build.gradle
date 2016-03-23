@@ -120,6 +120,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-facebook-login')
     compile project(':react-native-webview-bridge')
     compile project(':react-native-camera')
     compile project(':react-native-maps')
