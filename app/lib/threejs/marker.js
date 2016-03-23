@@ -80,6 +80,7 @@ export default THREE_RENDER_MARKER = `
     function onWindowResize() {
 
       camera.aspect = window.innerWidth / window.innerHeight;
+      camera.fov = camera.aspect > 1 ? 35 : 60;
       camera.updateProjectionMatrix();
 
       renderer.setSize( window.innerWidth, window.innerHeight );

@@ -157,11 +157,15 @@ export default class AR extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+
+      <View 
+        style={styles.container} 
+      >
         <Camera
           ref={(cam) => {
             this.camera = cam;
           }}
+          captureQuality={ 'low' }
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}>
         </Camera>
@@ -182,19 +186,23 @@ export default class AR extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   preview: {
-    position: 'absolute',
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
   },
   webviewcont: {
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     backgroundColor: 'transparent'
   },
   webView: {
