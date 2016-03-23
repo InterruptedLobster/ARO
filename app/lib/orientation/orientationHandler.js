@@ -46,12 +46,12 @@ export default HANDLE_ORIENTATION = `
 
         if( e.webkitCompassHeading) {
           // Apple works only with this, alpha doesn't work
-          compassdir = e.webkitCompassHeading;  
+          compassdir = e.webkitCompassHeading + window.orientation;  
         }
         else compassdir = e.alpha;
 
         // Set camera's heading
-        camera.rotation.y = -degreeToRad( compassdir + window.orientation );
+        camera.rotation.y = -degreeToRad( compassdir);
         
         // Configure frustum
         camera.updateMatrix(); // make sure camera's local matrix is updated

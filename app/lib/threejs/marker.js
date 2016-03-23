@@ -5,7 +5,8 @@ export default THREE_RENDER_MARKER = `
     var meshes = [];
     var mesh;
     var hemiLight;
-    var fov = 70;
+    var fovPortrait = 53;
+    var fovLandscape = 37.5;
 
     init();
     animate();
@@ -14,7 +15,7 @@ export default THREE_RENDER_MARKER = `
 
       /* CAMERA */
 
-      camera = new THREE.PerspectiveCamera( fov, window.innerWidth / window.innerHeight, 1, 5280 );
+      camera = new THREE.PerspectiveCamera( fovPortrait, window.innerWidth / window.innerHeight, 1, 5280 );
       frustum = new THREE.Frustum();
       scene = new THREE.Scene();
 
@@ -78,9 +79,11 @@ export default THREE_RENDER_MARKER = `
     }
 
     function onWindowResize() {
-
+      // Adjust the aspect ratio for the new size of the window.
       camera.aspect = window.innerWidth / window.innerHeight;
-      camera.fov = camera.aspect > 1 ? 35 : 60;
+
+      // TODO: Calculate FOV programatically
+      camera.fov = camera.aspect > 1 ? fovLandscape : fovPortrait;
       camera.updateProjectionMatrix();
 
       renderer.setSize( window.innerWidth, window.innerHeight );
@@ -97,7 +100,7 @@ export default THREE_RENDER_MARKER = `
 
     function render() {
 
-      mesh.rotation.y += 0.01;
+      // Add some spin for each mesh
       meshes.forEach( function( mesh ) {
         mesh.rotation.y += 0.01;
       })
