@@ -1,6 +1,7 @@
 import React, { Component, View } from 'react-native';
 import PinList from './PinList';
-import ViewMenu from './ViewMenu';
+import { Actions as routerActions } from 'react-native-router-flux';
+import Button from 'react-native-button';
 
 export default class extends Component {
 
@@ -17,8 +18,8 @@ export default class extends Component {
   render() {
     const { pins, deletePin } = this.props;
     return (
-      <View style={{flex: 1}}>
-        <ViewMenu />
+      <View style={{flex: 1, paddingTop: 20}}>
+        <Button onPress={routerActions.pop}>Back</Button>
         <PinList
           deletePin={deletePin}
           pins={pins}
