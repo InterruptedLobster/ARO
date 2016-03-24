@@ -14,9 +14,11 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './app/reducers/rootReducer.js';
 import ViewContainer from './app/containers/container_viewContainer';
+import Signin from './app/containers/container_FBlogin';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
+
 
 
 //creates logger
@@ -32,5 +34,6 @@ const findAR = () => (
     <ViewContainer />
   </Provider>
 );
+
 
 AppRegistry.registerComponent('findAR', () => findAR);

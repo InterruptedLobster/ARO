@@ -44,13 +44,13 @@ class LogIn extends Component {
     return (
       <View style={styles.loginContainer}>
 
-        { user && <Photo user={user} /> }
-        { user && <Info user={user} /> }
+        { user && <Photo user={user} action ={action} /> }
+        { user && <Info user={user} action={action} /> }
 
         <FBLogin style={{ marginBottom: 10, }}
           permissions={["email","user_friends"]}
           onLogin={function(data){
-            console.log("*******Logged in!");
+            console.log("*******Logged in! and this is props", this.props);
             action.logIn(data.credentials);
             // _this.setState({ user : data.credentials });
           }}
@@ -102,7 +102,9 @@ var Photo = React.createClass({
   // },
 
   componentWillMount: function(){
-    const { user } = this.props;
+    console.log('this is props in photo!!!!!!!', this.props);
+    const { user , action } = this.props;
+    console.log('this is {user in photo!!!}', user);
     var _this = this;
     // var user = this.props.user;
     var api = `https://graph.facebook.com/v2.3/${user.userId}/picture?width=${FB_PHOTO_WIDTH}&redirect=false&access_token=${user.token}`;
@@ -124,7 +126,7 @@ var Photo = React.createClass({
   },
 
   render: function(){
-    const { photo } = this.props;
+    const { photo } = this.props.user;
     if(photo === null) {
       return this.renderLoading();
     }
@@ -168,29 +170,32 @@ var Info = React.createClass({
   // },
 
   componentWillMount: function(){
+    console.log('----this is props im INFO', this.props);
+    const { user, action } = this.props;
     var _this = this;
-    var user = this.props.user;
+    // var user = this.props.user;
     var api = `https://graph.facebook.com/v2.3/${user.userId}?fields=name,email&access_token=${user.token}`;
 
     fetch(api)
       .then((response) => response.json())
       .then((responseData) => {
-        _this.setState({
-          info : {
-            name : responseData.name,
-            email: responseData.email,
-          },
-        });
+        action.getInfo(responseData)
+        // _this.setState({
+        //   info : {
+        //     name : responseData.name,
+        //     email: responseData.email,
+        //   },
+        // });
       })
       .done();
   },
 
   render: function(){
-    var info = this.state.info;
-
+    // var info = this.state.info;
+    const{ info } = this.props.user;
     return (
       <View style={styles.bottomBump}>
-        <Text>{ info && this.props.user.userId }</Text>
+       <Text>{ info && this.props.user.userId }</Text>
         <Text>{ info && info.name }</Text>
         <Text>{ info && info.email }</Text>
       </View>
@@ -226,6 +231,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn);
-const smartPhoto = connect(mapStateToProps, mapDispatchToProps)(Photo);
-const smartInfo = connect(mapStateToProps, mapDispatchToProps)(Info);
 

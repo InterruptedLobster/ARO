@@ -77,6 +77,7 @@ var Photo = React.createClass({
   },
 
   componentWillMount: function(){
+    console.log('+++++++++this is props in photo', this.props);
     var _this = this;
     var user = this.props.user;
     var api = `https://graph.facebook.com/v2.3/${user.userId}/picture?width=${FB_PHOTO_WIDTH}&redirect=false&access_token=${user.token}`;
@@ -84,6 +85,7 @@ var Photo = React.createClass({
     fetch(api)
       .then((response) => response.json())
       .then((responseData) => {
+        console.log('+++++++this is responseData in PHOTO', responseData )
         _this.setState({
           photo : {
             url : responseData.data.url,
@@ -143,6 +145,7 @@ var Info = React.createClass({
     fetch(api)
       .then((response) => response.json())
       .then((responseData) => {
+        console.log("++++++++++ this is responseData in info", responseData)
         _this.setState({
           info : {
             name : responseData.name,
@@ -154,6 +157,8 @@ var Info = React.createClass({
   },
 
   render: function(){
+    console.log('+++++++++this is props in info', this.props);
+    console.log('+++++++++this is state in info', this.state);
     var info = this.state.info;
 
     return (
