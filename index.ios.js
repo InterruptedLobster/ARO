@@ -2,11 +2,12 @@ import React, { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './app/reducers/rootReducer.js';
-import SmartMapView from './app/containers/container_MapView';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
-
+import ARView from './app/containers/container_ARView';
+import MapView from './app/containers/container_MapView';
+import PinListView from './app/containers/container_PinView';
 
 //creates logger
 const logger = createLogger();
@@ -18,7 +19,7 @@ const store = createStore(
 
 const findAR = () => (
   <Provider store={store}>
-    <SmartMapView />
+    <MapView />
   </Provider>
 );
 
