@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import getLocationToSave from '../actions/action_dropNewPin.js';
-import getPins from '../actions/action_updatePins.js';
-import deletePin from '../actions/action_deletePin.js';
-import updateRecent from '../actions/action_updateRecent.js';
-import MapView from './MapView.js';
+import getLocationToSave from '../actions/action_dropNewPin';
+import getPins from '../actions/action_updatePins';
+import deletePin from '../actions/action_deletePin';
+import updateRecent from '../actions/action_updateRecent';
+import MapView from './MapView';
 
 function mapStateToProps(state) {
   return {
