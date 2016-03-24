@@ -2,7 +2,7 @@ import React, { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './app/reducers/rootReducer.js';
-import ViewContainer from './app/containers/container_viewContainer';
+import SmartMapView from './app/containers/container_MapView';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
@@ -18,7 +18,7 @@ const store = createStore(
 
 const findAR = () => (
   <Provider store={store}>
-    <ViewContainer />
+    <SmartMapView />
   </Provider>
 );
 
