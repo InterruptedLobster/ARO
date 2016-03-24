@@ -6,9 +6,9 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
 import { Router, Scene, Actions as routerActions } from 'react-native-router-flux';
-import ARView from './app/containers/container_ARView';
-import MapView from './app/containers/container_MapView';
-import PinListView from './app/containers/container_PinListView';
+import ARView from './app/screens/ARViewContainer';
+import MapView from './app/screens/MapViewContainer';
+import PinListView from './app/screens/PinListViewContainer';
 
 //creates logger
 const logger = createLogger();
