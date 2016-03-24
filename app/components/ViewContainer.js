@@ -9,7 +9,7 @@ export default class ViewContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'map',
+      view: 'AR',
       currLoc: {
         latitude: 37.7835551,
         longitude: -122.4089013,
@@ -74,6 +74,11 @@ export default class ViewContainer extends Component {
           pins = {pins}
           recent = {recent}
         /> : void 0}
+        { view === 'AR' ?
+        <AR
+        currLoc={ this.state.currLoc }
+        pins= { pins } />
+        : void 0}
         <DropNewPinButton/>
       </View>
     );
