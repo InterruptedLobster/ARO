@@ -1,5 +1,5 @@
 import React, { Component, View } from 'react-native';
-import Map from './Map.js';
+import Map from './Map';
 import DropNewPinButton from '../containers/container_dropNewPin';
 
 export default class extends Component {
@@ -45,11 +45,7 @@ export default class extends Component {
       }
     );
   }
-  // <AR currLoc={ this.state.currLoc } pins={pins} />
-        // <PinList
-        //   deletePin={deletePin}
-        //   pins={pins}
-        //   />
+
   render() {
     const { getLocationToSave, pins, deletePin, recent } = this.props;
     return (
