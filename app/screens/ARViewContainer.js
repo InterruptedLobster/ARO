@@ -3,7 +3,7 @@ import getLocationToSave from '../actions/action_dropNewPin.js';
 import getPins from '../actions/action_updatePins.js';
 import deletePin from '../actions/action_deletePin.js';
 import updateRecent from '../actions/action_updateRecent.js';
-import ARView from '../components/ARView.js';
+import ARView from './ARView.js';
 
 function mapStateToProps(state) {
   return {

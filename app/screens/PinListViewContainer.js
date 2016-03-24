@@ -3,7 +3,7 @@ import getLocationToSave from '../actions/action_dropNewPin.js';
 import getPins from '../actions/action_updatePins.js';
 import deletePin from '../actions/action_deletePin.js';
 import updateRecent from '../actions/action_updateRecent.js';
-import MapView from '../components/MapView.js';
+import PinListView from './PinListView.js';
 
 function mapStateToProps(state) {
   return {
@@ -12,4 +12,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getLocationToSave, getPins, deletePin, updateRecent })(MapView);
+export default connect(mapStateToProps, { getLocationToSave, getPins, deletePin, updateRecent })(PinListView);

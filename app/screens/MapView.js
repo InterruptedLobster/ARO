@@ -1,6 +1,6 @@
 import React, { Component, View } from 'react-native';
-import AR from './AR';
-import ViewMenu from './ViewMenu';
+import Map from '../component/Map';
+import ViewMenu from '../component/ViewMenu';
 import DropNewPinButton from '../containers/container_dropNewPin';
 
 export default class extends Component {
@@ -51,7 +51,13 @@ export default class extends Component {
     const { getLocationToSave, pins, deletePin, recent } = this.props;
     return (
       <View style={{flex: 1}}>
-        <AR currLoc={ this.state.currLoc } pins={pins} />
+        <Map
+          getLocationToSave={getLocationToSave}
+          currLoc={this.state.currLoc}
+          initialLoc={this.state.initialLoc}
+          pins = {pins}
+          recent = {recent}
+        />
         <ViewMenu />
         <DropNewPinButton/>
       </View>
