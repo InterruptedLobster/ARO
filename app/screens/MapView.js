@@ -1,6 +1,6 @@
 import React, { Component, View } from 'react-native';
-import Map from '../component/Map';
-import ViewMenu from '../component/ViewMenu';
+import Map from '../components/Map';
+import ViewMenu from '../components/ViewMenu';
 import DropNewPinButton from '../containers/container_dropNewPin';
 
 export default class extends Component {

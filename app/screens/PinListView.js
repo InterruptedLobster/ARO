@@ -1,5 +1,5 @@
 import React, { Component, View } from 'react-native';
-import PinList from '../component/PinList';
+import PinList from '../components/PinList';
 import { Actions as routerActions } from 'react-native-router-flux';
 import Button from 'react-native-button';
 
