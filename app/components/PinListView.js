@@ -1,7 +1,6 @@
 import React, { Component, View } from 'react-native';
 import PinList from './PinList';
 import ViewMenu from './ViewMenu';
-import DropNewPinButton from '../containers/container_dropNewPin';
 
 export default class extends Component {
 
@@ -56,7 +55,6 @@ export default class extends Component {
           deletePin={deletePin}
           pins={pins}
           />
-        <DropNewPinButton/>
       </View>
     );
   }
