@@ -18,9 +18,17 @@ const store = createStore(
   applyMiddleware(thunk, promise, logger)
 );
 
+const scenes = routerActions.create(
+  <Scene key="root" hideNavBar>
+    <Scene key="ar" component={ARView} />
+    <Scene initial key="map" component={MapView} />
+    <Scene key="list" component={PinListView} />
+  </Scene>
+);
+
 const findAR = () => (
   <Provider store={store}>
-    <MapView />
+    <Router scenes={scenes} />
   </Provider>
 );
 
