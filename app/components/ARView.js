@@ -51,8 +51,8 @@ export default class extends Component {
     const { getLocationToSave, pins, deletePin, recent } = this.props;
     return (
       <View style={{flex: 1}}>
-        <ViewMenu />
         <AR currLoc={ this.state.currLoc } pins={pins} />
+        <ViewMenu />
         <DropNewPinButton/>
       </View>
     );

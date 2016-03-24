@@ -51,7 +51,6 @@ export default class extends Component {
     const { getLocationToSave, pins, deletePin, recent } = this.props;
     return (
       <View style={{flex: 1}}>
-        <ViewMenu />
         <Map
           getLocationToSave={getLocationToSave}
           currLoc={this.state.currLoc}
@@ -59,6 +58,7 @@ export default class extends Component {
           pins = {pins}
           recent = {recent}
         />
+        <ViewMenu />
         <DropNewPinButton/>
       </View>
     );
