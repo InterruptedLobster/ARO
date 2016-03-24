@@ -47,14 +47,7 @@ export default class ViewContainer extends Component {
       }
     );
   }
-
-        // <Map
-        //   getLocationToSave={getLocationToSave}
-        //   currLoc={this.state.currLoc}
-        //   initialLoc={this.state.initialLoc}
-        //   pins = {pins}
-        //   recent = {recent}
-        // />
+  // <AR currLoc={ this.state.currLoc } pins={pins} />
         // <PinList
         //   deletePin={deletePin}
         //   pins={pins}
@@ -63,7 +56,13 @@ export default class ViewContainer extends Component {
     const { getLocationToSave, pins, deletePin, recent } = this.props;
     return (
       <View style={{flex: 1}}>
-        <AR currLoc={ this.state.currLoc } pins={pins} />
+        <Map
+          getLocationToSave={getLocationToSave}
+          currLoc={this.state.currLoc}
+          initialLoc={this.state.initialLoc}
+          pins = {pins}
+          recent = {recent}
+        />
         <DropNewPinButton/>
       </View>
     );
