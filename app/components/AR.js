@@ -1,10 +1,10 @@
 import React, { Component, StyleSheet, Dimensions, View } from 'react-native';
 import Camera from 'react-native-camera';
 import WebViewBridge from 'react-native-webview-bridge';
-import THREE_RENDER_MARKER from '../lib/threejs/marker.js';
-import THREE_RENDER_TEXT from '../lib/threejs/text.js';
-import HANDLE_ORIENTATION from '../lib/orientation/orientationHandler.js';
-import Location from '../lib/orientation/locationMath.js';
+import THREE_RENDER_MARKER from '../lib/threejs/marker';
+import THREE_RENDER_TEXT from '../lib/threejs/text';
+import HANDLE_ORIENTATION from '../lib/orientation/orientationHandler';
+import Location from '../lib/orientation/locationMath';
 import _ from 'underscore';
 const REF_WEBVIEW_BRIDGE = 'webviewbridge';
 
@@ -170,8 +170,8 @@ export default class AR extends Component {
   render() {
     return (
 
-      <View 
-        style={styles.container} 
+      <View
+        style={styles.container}
       >
         <Camera
           ref={(cam) => {

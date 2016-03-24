@@ -1,5 +1,5 @@
 import React, {Component, View, ListView} from 'react-native';
-import PinListItem from './PinListItem.js';
+import PinListItem from './PinListItem';
 
 export default class PinList extends Component {
 

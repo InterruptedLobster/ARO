@@ -1,25 +1,14 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-'use strict';
-import React, {
-  AppRegistry,
-  Component,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import React, { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import rootReducer from './app/reducers/rootReducer.js';
-import ViewContainer from './app/containers/container_viewContainer';
-import Menu from './app/components/Menu.js';
+import rootReducer from './app/reducers/rootReducer';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
-const SideMenu = require('react-native-side-menu');
-
+import { Router, Scene, Actions as routerActions } from 'react-native-router-flux';
+import ARView from './app/screens/ARViewContainer';
+import MapView from './app/screens/MapViewContainer';
+import PinListView from './app/screens/PinListViewContainer';
 
 //creates logger
 const logger = createLogger();
@@ -29,27 +18,18 @@ const store = createStore(
   applyMiddleware(thunk, promise, logger)
 );
 
-class findAR extends Component {
+const scenes = routerActions.create(
+  <Scene key="root" hideNavBar>
+    <Scene key="ar" component={ARView} />
+    <Scene initial key="map" component={MapView} />
+    <Scene key="list" component={PinListView} />
+  </Scene>
+);
 
-  constructor() {
-    super();
-  }
-
-  onMenuItemSelected () {
-    return '';
-  }
-  render() {
-    const menu = <Menu onItemSelected={this.onMenuItemSelected} navigator={navigator}/>;
-    return (
-      <Provider store={store}>
-        <SideMenu menu={menu}>
-          <ViewContainer >
-          </ViewContainer>
-        </SideMenu>
-      </Provider>
-    );
-  }
-}
+const findAR = () => (
+  <Provider store={store}>
+    <Router scenes={scenes} />
+  </Provider>
+);
 
 AppRegistry.registerComponent('findAR', () => findAR);
-

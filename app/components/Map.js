@@ -3,7 +3,7 @@ import Button from 'react-native-button';
 import MapView from 'react-native-maps';
 import _ from 'underscore';
 import image from '../assets/redPin.png';
-import { PinCallout } from './PinCallout.js';
+import { PinCallout } from './PinCallout';
 
 export default class Map extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ export default class Map extends Component {
   onRegionChange(region) {
     this.setState({ position: region });
   }
-  
+
   renderMarkers() {
     const { pins } = this.props;
     return _.map(pins, (pinObject, key) => {
@@ -53,13 +53,12 @@ export default class Map extends Component {
     return (
       <View style={styles.container}>
         <MapView
+          style={styles.map}
           showsUserLocation={true}
           //TODO: find a better way to show map initially, added below line so it would stop zooming in from world view
           initialRegion={{longitudeDelta: 0.005000044296161832, latitude: currLoc.latitude,longitude: currLoc.longitude, latitudeDelta: 0.00536722351829988  }}
           region={this.state.position}
           onRegionChange={this.onRegionChange.bind(this)}
-
-          style={styles.map}
           showsCompass={true}
           onLongPress={
             (e) => {
@@ -85,7 +84,7 @@ export default class Map extends Component {
 
         {Object.keys(pins).length !== 0 ? this.renderMarkers.call(this) : void 0 }
         </MapView>
-        <Button
+        <Button style={styles.center}
           onPress={this.moveMapToUser.bind(this, this.props.fullLoc)}>
           CENTER ON ME
         </Button>
@@ -100,21 +99,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    color: 'white',
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    color: 'white',
-    textAlign: 'center',
-    marginBottom: 5,
-  },
   map: {
-    height: Dimensions.get('window').height/2,
-    margin: 10,
-    borderWidth: 1,
-    borderColor: '#000000',
+    height: Dimensions.get('window').height,
   },
+  center: {
+    position: 'absolute',
+    bottom: 20,
+    right: 10,
+    padding: 5
+  }
 });

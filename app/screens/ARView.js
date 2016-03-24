@@ -1,10 +1,10 @@
 import React, { Component, View } from 'react-native';
-import AR from './AR.js';
-import Map from './Map.js';
+import AR from '../components/AR';
+import { Actions as routerActions } from 'react-native-router-flux';
+import Button from 'react-native-button';
 import DropNewPinButton from '../containers/container_dropNewPin';
-import PinList from './PinList.js';
 
-export default class ViewContainer extends Component {
+export default class extends Component {
 
   constructor(props) {
     super(props);
@@ -48,21 +48,11 @@ export default class ViewContainer extends Component {
     );
   }
 
-        // <Map
-        //   getLocationToSave={getLocationToSave}
-        //   currLoc={this.state.currLoc}
-        //   initialLoc={this.state.initialLoc}
-        //   pins = {pins}
-        //   recent = {recent}
-        // />
-        // <PinList
-        //   deletePin={deletePin}
-        //   pins={pins}
-        //   />
   render() {
     const { getLocationToSave, pins, deletePin, recent } = this.props;
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, paddingTop: 20}}>
+        <Button onPress={routerActions.pop}>Back</Button>
         <AR currLoc={ this.state.currLoc } pins={pins} />
         <DropNewPinButton/>
       </View>
