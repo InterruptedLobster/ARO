@@ -1,6 +1,7 @@
 import React, { Component, View } from 'react-native';
 import AR from '../components/AR';
-import ViewMenu from '../components/ViewMenu';
+import { Actions as routerActions } from 'react-native-router-flux';
+import Button from 'react-native-button';
 import DropNewPinButton from '../containers/container_dropNewPin';
 
 export default class extends Component {
@@ -50,9 +51,9 @@ export default class extends Component {
   render() {
     const { getLocationToSave, pins, deletePin, recent } = this.props;
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, paddingTop: 20}}>
+        <Button onPress={routerActions.pop}>Back</Button>
         <AR currLoc={ this.state.currLoc } pins={pins} />
-        <ViewMenu />
         <DropNewPinButton/>
       </View>
     );

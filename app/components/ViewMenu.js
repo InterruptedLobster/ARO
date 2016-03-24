@@ -19,7 +19,6 @@ const styles = {
 export default () => (
   <View style={styles.View}>
     <Button style={styles.Button} onPress={routerActions.ar}>AR</Button>
-    <Button style={styles.Button} onPress={routerActions.map}>Map</Button>
     <Button style={styles.Button} onPress={routerActions.list}>List</Button>
   </View>
 );
