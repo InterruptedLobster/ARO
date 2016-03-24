@@ -15,7 +15,7 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './app/reducers/rootReducer.js';
 import ViewContainer from './app/containers/container_viewContainer';
 import Menu from './app/components/Menu.js';
-import Signin from './app/containers/container_FBlogin';
+import Signin from './app/containers/container_FBLogin';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
@@ -40,14 +40,14 @@ class findAR extends Component {
   onMenuItemSelected () {
     return '';
   }
-  // <ViewContainer >
-  // </ViewContainer>
+
   render() {
     const menu = <Menu onItemSelected={this.onMenuItemSelected} navigator={navigator}/>;
     return (
       <Provider store={store}>
         <SideMenu menu={menu}>
-          <Signin/>
+          <ViewContainer >
+          </ViewContainer>
         </SideMenu>
       </Provider>
     );

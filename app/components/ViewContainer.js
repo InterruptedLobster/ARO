@@ -61,10 +61,19 @@ export default class ViewContainer extends Component {
         //   />
         // <AR currLoc={ this.state.currLoc } pins= { pins } />
   render() {
-    const { getLocationToSave, pins, deletePin, recent } = this.props;
+    const {getLocationToSave, pins, recent} = this.props;
+    const { view } = this.state;
     return (
-      <View style={{flex: 1}}>
-        <AR currLoc={ this.state.currLoc } pins={pins} />
+      <View>
+      { view === 'map' ?
+        <Map
+          getLocationToSave={getLocationToSave}
+          currLoc={this.state.currLoc}
+          initialLoc={this.state.initialLoc}
+          isFollowingUser={this.state.isFollowingUser}
+          pins = {pins}
+          recent = {recent}
+        /> : void 0}
         <DropNewPinButton/>
       </View>
     );
