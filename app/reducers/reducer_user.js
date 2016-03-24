@@ -1,4 +1,4 @@
-import {SIGN_UP, LOG_IN, LOG_OUT, GET_INFO} from '../constants/constants.js';
+import {SIGN_UP, LOG_IN, LOG_OUT, GET_INFO, GET_PHOTO} from '../constants/constants.js';
 
 const initialState = {
   userId : null,
@@ -7,7 +7,7 @@ const initialState = {
   //   email:null,
   //   permissions: null,
   //   error: null
-  },
+  // },
   photo: null,
   info: null,
   // photo : {
@@ -29,21 +29,23 @@ export default function(state = initialState, action) {
         action.payload
         );
     case LOG_IN:
-    // console.log("made it to action login !!!!!", action.payload);
+    console.log("made it to action login !!!!!", action.payload);
     let userInfo = {};
       userInfo[action.payload.userId] = action.payload;
-      // console.log("made it to action login !!!!!", userInfo);
-      return action.payload;
+      console.log("made it to action login this is userInfo!!!!!", userInfo);
+      return userInfo;
     case LOG_OUT:
       return initialState;
     case GET_PHOTO:
+    console.log("%%%%% made it to action GET_PHOTO", action.payload);
       return Object.assign({}, state,
         action.payload
-      )
+      );
     case GET_INFO:
+      console.log("%%%%% made it to action GET_INFO", action.payload);
       return Object.assign({}, state,
         action.payload
-      )
+      );
     default:
       return state;
   }
