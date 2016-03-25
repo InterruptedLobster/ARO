@@ -35,20 +35,5 @@ const findAR = () => (
   </Provider>
 );
 
-<<<<<<< 3089f3c9d00322163c71b884cc272b2199c7f085
-=======
-  render() {
-    const menu = <Menu onItemSelected={this.onMenuItemSelected} navigator={navigator}/>;
-    return (
-      <Provider store={store}>
-
-          <ViewContainer >
-          </ViewContainer>
-
-      </Provider>
-    );
-  }
-}
->>>>>>> exploring if statement rendering
 
 AppRegistry.registerComponent('findAR', () => findAR);

@@ -15,4 +15,6 @@ export const changeUser = function( uid ) {
     myCurrLoc = currLoc.child( uid );
     userData = user.child( 'pins' );
     userRecent = user.child( 'recent' );
-}
+};
+
+export const refTest = new Firebase("https://interruptedlobster.firebaseio.com/");
