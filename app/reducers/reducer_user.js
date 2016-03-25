@@ -1,21 +1,6 @@
 import {SIGN_UP, LOG_IN, LOG_OUT, GET_INFO, GET_PHOTO} from '../constants/constants.js';
 
-const initialState = {
-  userId : null,
-  // userId: {
-  //   token: null,
-  //   email:null,
-  //   permissions: null,
-  //   error: null
-  // },
-  photo: null,
-  info: null,
-  // photo : {
-  //   url : null,
-  //   height: null,
-  //   width: null,
-  // },
-};
+var initialState = {};
 //this is action.payload:
 // { tokenExpirationDate: '2016-05-22T17:41:07-07:00',
 //   permissions: [ 'email', 'contact_email', 'user_friends', 'public_profile' ],
@@ -29,10 +14,8 @@ export default function(state = initialState, action) {
         action.payload
         );
     case LOG_IN:
-    // console.log("made it to action login !!!!!", action.payload);
     let userInfo = {};
-      userInfo[action.payload.userId] = action.payload;
-      // console.log("made it to action login this is userInfo!!!!!", userInfo);
+      userInfo[action.payload.uid] = action.payload;
       return userInfo;
     case LOG_OUT:
       return initialState;
