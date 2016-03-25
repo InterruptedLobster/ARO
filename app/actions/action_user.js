@@ -37,16 +37,14 @@ export const firebase_check = (userCredentials) => {
         dispatch(logIn(userInfo));
         });
       } else {
-        let hi = refTest.child(id) || "sorry";
-        console.log('this is data if user already exists', hi);
-        dispatch(logIn(userCredentials));
+        refTest.child(id).on("value", function(snapshot) {
+          let found = snapshot.val();
+          // console.log(found, 'this is found user!!!!<<<<----');
+          dispatch(logIn(found));
+        });
       }
   };
 };
-
-
-
-
 
 export const logOut = function () {
   return {
