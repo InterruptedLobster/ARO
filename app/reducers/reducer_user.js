@@ -29,20 +29,20 @@ export default function(state = initialState, action) {
         action.payload
         );
     case LOG_IN:
-    console.log("made it to action login !!!!!", action.payload);
+    // console.log("made it to action login !!!!!", action.payload);
     let userInfo = {};
       userInfo[action.payload.userId] = action.payload;
-      console.log("made it to action login this is userInfo!!!!!", userInfo);
+      // console.log("made it to action login this is userInfo!!!!!", userInfo);
       return userInfo;
     case LOG_OUT:
       return initialState;
     case GET_PHOTO:
-    console.log("%%%%% made it to action GET_PHOTO", action.payload);
+    // console.log("%%%%% made it to action GET_PHOTO", action.payload);
       return Object.assign({}, state,
         action.payload
       );
     case GET_INFO:
-      console.log("%%%%% made it to action GET_INFO", action.payload);
+      // console.log("%%%%% made it to action GET_INFO", action.payload);
       return Object.assign({}, state,
         action.payload
       );

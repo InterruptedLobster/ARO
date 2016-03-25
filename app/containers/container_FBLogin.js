@@ -29,29 +29,21 @@ class LogIn extends Component {
     //   user: null
     // };
   }
-  componentWillMount() {
-    // console.log('this is will mount userTest:', this.props.userTest);
-  }
-  componentDidMount() {
-    // console.log('this is did mount userTest:', this.props.userTest);
-  }
+     // { user && <Photo user={user} action ={action} /> }
+      // { user && <Info user={user} action={action} /> }
   render() {
   const { user, action } = this.props;
-
     // console.log('this is props!@#!@#!@#!', this.props)
     var _this = this;
     // var user = this.state.user;
     return (
       <View style={styles.loginContainer}>
 
-        { user && <Photo user={user} action ={action} /> }
-        { user && <Info user={user} action={action} /> }
-
         <FBLogin style={{ marginBottom: 10, }}
           permissions={["email","user_friends"]}
           onLogin={function(data){
-            console.log("*******Logged in! and this is props", this.props);
-            action.logIn(data.credentials);
+            console.log("*******Logged in! and this is props");
+            action.firebase_check(data.credentials);
             // _this.setState({ user : data.credentials });
           }}
           onLogout={function(){
@@ -60,13 +52,15 @@ class LogIn extends Component {
             // _this.setState({ user : null });
           }}
           onLoginFound={function(data){
+            //if user was already signed in, no need to sign in again
             console.log("********Existing login found.");
 
-            action.logIn(data.credentials);
+            // action.logIn(data.credentials); does data persist already?
 
             // _this.setState({ user : data.credentials });
           }}
           onLoginNotFound={function(){
+            //if user has not signed in since last session
             console.log("*******No user logged in.");
             action.logOut();
             // _this.setState({ user : null });
@@ -89,119 +83,6 @@ class LogIn extends Component {
     );
   }
 }
-
-var Photo = React.createClass({
-  propTypes: {
-    user: React.PropTypes.object.isRequired,
-  },
-
-  // getInitialState: function(){
-  //   return {
-  //     photo: null,
-  //   };
-  // },
-
-  componentWillMount: function(){
-    console.log('this is props in photo!!!!!!!', this.props);
-    const { user , action } = this.props;
-    console.log('this is {user in photo!!!}', user);
-    var _this = this;
-    // var user = this.props.user;
-    var api = `https://graph.facebook.com/v2.3/${user.userId}/picture?width=${FB_PHOTO_WIDTH}&redirect=false&access_token=${user.token}`;
-
-    fetch(api)
-      .then((response) => response.json())
-      .then((responseData) => {
-        console.log('------this is responseData from photo fetch!----->>>', responseData.data);
-        action.getPhoto(responseData.data);
-        // _this.setState({
-        //   photo : {
-        //     url : responseData.data.url,
-        //     height: responseData.data.height,
-        //     width: responseData.data.width,
-        //   },
-        // });
-      })
-      .done();
-  },
-
-  render: function(){
-    const { photo } = this.props.user;
-    if(photo === null) {
-      return this.renderLoading();
-    }
-    // if(this.state.photo == null) return this.renderLoading();
-
-    // var photo = this.state.photo;
-
-    return (
-      <View style={styles.bottomBump}>
-
-        <Image
-          style={photo &&
-            {
-              height: photo.height,
-              width: photo.width,
-            }
-          }
-          source={{uri: photo && photo.url}}
-        />
-      </View>
-    );
-  },
-  renderLoading: function(){
-    return (
-      <View>
-        <Text>Loading...</Text>
-      </View>
-    );
-  }
-});
-
-var Info = React.createClass({
-  propTypes: {
-    user: React.PropTypes.object.isRequired,
-  },
-
-  // getInitialState: function(){
-  //   return {
-  //     info: null,
-  //   };
-  // },
-
-  componentWillMount: function(){
-    console.log('----this is props im INFO', this.props);
-    const { user, action } = this.props;
-    var _this = this;
-    // var user = this.props.user;
-    var api = `https://graph.facebook.com/v2.3/${user.userId}?fields=name,email&access_token=${user.token}`;
-
-    fetch(api)
-      .then((response) => response.json())
-      .then((responseData) => {
-        action.getInfo(responseData)
-        // _this.setState({
-        //   info : {
-        //     name : responseData.name,
-        //     email: responseData.email,
-        //   },
-        // });
-      })
-      .done();
-  },
-
-  render: function(){
-    // var info = this.state.info;
-    const{ info } = this.props.user;
-    return (
-      <View style={styles.bottomBump}>
-       <Text>{ info && this.props.user.userId }</Text>
-        <Text>{ info && info.name }</Text>
-        <Text>{ info && info.email }</Text>
-      </View>
-    );
-  }
-});
 
 var styles = StyleSheet.create({
   loginContainer: {
