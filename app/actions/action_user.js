@@ -10,7 +10,6 @@ export const logIn = (payload) => {
 
 export const firebase_check = (userCredentials) => {
   let id = userCredentials.userId;
-  console.log('this is user id', id);
   let token = userCredentials.token;
   let api = "https://graph.facebook.com/v2.3/"+id+"?fields=name,email,picture&access_token="+token;
   function checkIfUserExists(userId) {
@@ -31,7 +30,6 @@ export const firebase_check = (userCredentials) => {
           userInfo.name = responseData.name;
           userInfo.email = responseData.email;
           userInfo.picture = responseData.picture.data.url;
-
         //pushes all gathereed infor to database
         let newUser = refTest.child(id).set(userInfo);
         dispatch(logIn(userInfo));
