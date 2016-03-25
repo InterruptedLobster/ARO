@@ -10,6 +10,7 @@ export const logIn = (payload) => {
 
 export const firebase_check = (userCredentials) => {
   let id = userCredentials.userId;
+  console.log('this is user id', id);
   let token = userCredentials.token;
   let api = "https://graph.facebook.com/v2.3/"+id+"?fields=name,email,picture&access_token="+token;
   function checkIfUserExists(userId) {
@@ -20,18 +21,17 @@ export const firebase_check = (userCredentials) => {
   }
   return(dispatch) => {
     let userExist = checkIfUserExists(id);
-      if(userExist === 'false') {
+      if(!userExist) {
         let userInfo={};
         userInfo.uid = id;
-        userInfo.token = userCredentials.token;
         //fetch the other info
         return fetch(api)
         .then((response) => response.json())
         .then((responseData)=> {
-          console.log('made it to fetch .then!! responseData------>>>>>', responseData);
           userInfo.name = responseData.name;
           userInfo.email = responseData.email;
           userInfo.picture = responseData.picture.data.url;
+
         //pushes all gathereed infor to database
         let newUser = refTest.child(id).set(userInfo);
         dispatch(logIn(userInfo));
@@ -39,7 +39,6 @@ export const firebase_check = (userCredentials) => {
       } else {
         refTest.child(id).on("value", function(snapshot) {
           let found = snapshot.val();
-          // console.log(found, 'this is found user!!!!<<<<----');
           dispatch(logIn(found));
         });
       }
