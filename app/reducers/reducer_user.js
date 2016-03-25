@@ -1,4 +1,4 @@
-import {SIGN_UP, LOG_IN, LOG_OUT, GET_INFO, GET_PHOTO} from '../constants/constants.js';
+import { LOG_IN, LOG_OUT } from '../constants/constants.js';
 
 var initialState = {};
 
