@@ -17,6 +17,7 @@ import ViewContainer from './app/containers/container_viewContainer';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
+import Signin from './app/containers/container_FBLogin';
 
 
 //creates logger
@@ -29,7 +30,7 @@ const store = createStore(
 
 const findAR = () => (
   <Provider store={store}>
-    <ViewContainer />
+    <Signin/>
   </Provider>
 );
 
