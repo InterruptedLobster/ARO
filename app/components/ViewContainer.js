@@ -54,6 +54,7 @@ export default class ViewContainer extends Component {
     this.setState({ view });
   }
 
+
   render() {
     const { getLocationToSave, pins, updatePins, updateRecent, deletePin, recent } = this.props;
 

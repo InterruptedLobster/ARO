@@ -14,10 +14,15 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './app/reducers/rootReducer.js';
 import ViewContainer from './app/containers/container_viewContainer';
+<<<<<<< HEAD
 import Signin from './app/containers/container_FBLogin';
+=======
+import Menu from './app/components/Menu.js';
+import Signin from './app/containers/container_FBlogin';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promise from 'redux-promise';
+
 
 
 

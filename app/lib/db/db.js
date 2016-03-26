@@ -18,4 +18,3 @@ export const changeUser = function( uid ) {
     userRecent = user.child( 'recent' );
 };
 
-
