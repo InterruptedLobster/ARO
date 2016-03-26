@@ -1,9 +1,0 @@
-language: node_js
-node_js:
-  - "0.10"
-script:
-  - echo 'Hello Firebase'
-install:
-  - npm install -g firebase-tools
-after_success:
-  - firebase deploy --email ${FIREBASE_USERNAME} --password ${FIREBASE_PASSWORD}
