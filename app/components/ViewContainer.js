@@ -10,7 +10,7 @@ export default class ViewContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'map',
+      view: 'AR',
       currLoc: {
         latitude: 37.7835551,
         longitude: -122.4089013,
@@ -53,6 +53,7 @@ export default class ViewContainer extends Component {
   toggleView(view) {
     this.setState({ view });
   }
+
 
   render() {
     const { getLocationToSave, pins, updatePins, updateRecent, deletePin, recent } = this.props;

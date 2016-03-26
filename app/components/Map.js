@@ -42,7 +42,7 @@ export default class Map extends Component {
         'plain-text'
       );
   }
-  
+
   renderMarkers() {
     const { pins } = this.props;
     return _.map(pins, (pinObject, key) => {
@@ -71,7 +71,7 @@ export default class Map extends Component {
     const { updatePins, updateRecent, deletePin } = this.props;
     return (
       <View style={styles.editButton}>
-        <PinEditButton 
+        <PinEditButton
           pin={this.state.selectedPin}
           updatePins={updatePins}
           updateRecent={updateRecent}

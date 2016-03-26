@@ -5,7 +5,7 @@ function updateRecent(payload) {
   return {
     type: UPDATE_RECENT,
     payload
-  }
+  };
 }
 
 export default function() {

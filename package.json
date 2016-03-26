@@ -11,6 +11,7 @@
     "react-native": "^0.22.2",
     "react-native-button": "^1.4.2",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
+    "react-native-facebook-login": "^1.0.3",
     "react-native-maps": "^0.3.0",
     "react-native-side-menu": "^0.18.0",
     "react-native-webview-bridge": "^0.20.3",
