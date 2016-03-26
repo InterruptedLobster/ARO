@@ -6,6 +6,7 @@ export let user = ref.child('anonymous');
 export let userData = user.child('pins');
 export let userRecent = user.child('recent');
 
+
 export const changeUser = function( uid ) {
   if( typeof uid !== 'string' ) {
     console.error( 'uid must have typeof string in changeUser( uid )' );
