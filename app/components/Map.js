@@ -24,7 +24,7 @@ export default class Map extends Component {
   componentWillMount() {
     const { friends } = this.props;
     let self = this;
-    let counter = 0;  
+    let counter = 0;
      for(var friendId in friends) {
       self.setListener(friends[friendId]);
       counter++;
@@ -85,12 +85,11 @@ export default class Map extends Component {
         'plain-text'
       );
   }
-  
+
   renderMarkers() {
     const { pins, targetPin } = this.props;
 
     return _.map(pins, (pinObject, key) => {
-
       let image = baseImg;
       if ( key === targetPin.id ) {
         image = targetImg;
@@ -118,7 +117,7 @@ export default class Map extends Component {
     const { updatePins, updateRecent, deletePin, setTarget, targetPin } = this.props;
     return (
       <View style={styles.editButton}>
-        <PinEditButton 
+        <PinEditButton
           pin={this.state.selectedPin}
           updatePins={updatePins}
           updateRecent={updateRecent}

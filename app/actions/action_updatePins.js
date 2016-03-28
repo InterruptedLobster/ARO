@@ -6,7 +6,7 @@ const updatePins = (payload) => {
     payload
   };
 };
-cosnt alertShare = (payload) => {
+const alertShare = (payload) => {
   return {
     type: ALERT_SHARE,
     payload
@@ -21,10 +21,9 @@ export default function(pin, newTitle) {
     userData.on("value", function(snap) {
       var pins = snap.val();
       for(var key in pins) {
-        console.log(key, 'these are keys in obj')
         if (pins[key].friend) {
-          dispatch()
-          console.log('found pin from friend!');
+          dispatch(alertShare(pins[key]));
+          console.log('found pin from friend!', pins[key]);
         }
       }
       dispatch(updatePins(snap.val()));
