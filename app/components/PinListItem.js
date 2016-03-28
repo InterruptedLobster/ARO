@@ -62,7 +62,8 @@ export default class PinListItem extends Component {
       return null;
     }
     // Make a copy of the pin
-    var pinCopy = Object.assign({}, pin);
+
+    var pinCopy = Object.assign({}, {shared: false} ,pin);
     // Set pin.friend to the userID of the person sending the pin
     pinCopy.friend = user;
     // Post the pin to the friend's firebase.
@@ -73,7 +74,7 @@ export default class PinListItem extends Component {
 
   editTitle(value) {
     const { pin, updatePins, updateRecent } = this.props;
-    
+
     updatePins(pin, value);
     updateRecent();
   }
@@ -86,7 +87,7 @@ export default class PinListItem extends Component {
      name = pin.friend.name;
     }
     return (
-      <TouchableHighlight 
+      <TouchableHighlight
         onPress={() => {
           this.touchOptions()
         }}
