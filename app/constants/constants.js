@@ -7,3 +7,4 @@ export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
 export const UPDATE_FRIENDS = 'UPDATE_FRIENDS';
 export const SET_TARGET = 'SET_TARGET';
+export const CLEAR_TARGET = 'CLEAR_TARGET';

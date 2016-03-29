@@ -5,6 +5,7 @@ import getLocationToSave from '../actions/action_dropNewPin';
 import updatePins from '../actions/action_updatePins';
 import deletePin from '../actions/action_deletePin';
 import updateRecent from '../actions/action_updateRecent';
+import clearTarget from '../actions/action_setTarget';
 import setTarget from '../actions/action_setTarget';
 import ViewContainer from '../components/ViewContainer';
 
@@ -19,4 +20,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getLocationToSave, updatePins, deletePin, updateRecent, setTarget })(ViewContainer);
+export default connect(mapStateToProps, { getLocationToSave, updatePins, deletePin, updateRecent, setTarget, clearTarget })(ViewContainer);
