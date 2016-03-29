@@ -34,7 +34,7 @@ export default class ViewContainer extends Component {
       { this.state.view === 'ar' ? <AR pins={pins} targetPin={targetPin} /> : void 0 }
       { this.state.view === 'map' ? <Map
           getLocationToSave={getLocationToSave}
-          initialLoc={this.state.initialLoc}
+          // initialLoc={this.state.initialLoc}
           pins = {pins}
           recent = {recent}
           updatePins={updatePins}
