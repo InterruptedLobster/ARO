@@ -18,6 +18,12 @@ export default class Map extends Component {
       dropPinLocation: undefined,
       loaded: false,
       friendLocs: {},
+      stateLocation: {
+        longitude: null,
+        latitude: null,
+        longitudeDelta: 0.005,
+        latitudeDelta: 0.005
+      }
     };
   }
 // Friend
@@ -37,7 +43,6 @@ export default class Map extends Component {
   setListener(friend) {
     let self = this;
     currLoc.child(friend.id).on("value", function(snap) {
-      console.log('jake is moving')
       self.state.friendLocs[friend.id] = snap.val();
     });
   }
@@ -68,7 +73,7 @@ export default class Map extends Component {
         coords.longitudeDelta = 0.005;
         coords.latitudeDelta = 0.005;
         this.setState({
-          currLoc: coords
+          stateLocation: coords
         });
       },
       (error) => {
@@ -143,9 +148,10 @@ export default class Map extends Component {
       </View>
     )
   }
+
   moveMapToUser() {
-    const {currLoc} = this.state;
-    this.refs.map.animateToRegion(currLoc, 250)
+    const {stateLocation} = this.state;
+    this.refs.map.animateToRegion(stateLocation, 2500)
   }
 
   goToTarget(pinObj){
@@ -155,7 +161,7 @@ export default class Map extends Component {
 
   render() {
     const { pins, getLocationToSave, recent, targetPin, friends } = this.props;
-    const { currLoc } = this.state;
+    const { stateLocation } = this.state;
 
     if(targetPin.longitude) {
       this.goToTarget.call(this, targetPin);
@@ -187,7 +193,7 @@ export default class Map extends Component {
           <Button
             style={[styles.bubble, styles.button]}
             onPress={this.moveMapToUser.bind(this)}>
-            CENTER ON ME
+            Center on me!
           </Button>
         </View>
       </View>
