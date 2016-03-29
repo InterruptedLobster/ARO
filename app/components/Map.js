@@ -6,6 +6,8 @@ import baseImg from '../assets/redPin.png';
 import targetImg from '../assets/blackPin.png';
 import { PinCallout } from './PinCallout';
 import PinEditButton from './PinEditButton';
+import { myCurrLoc, currLoc } from '../lib/db/db';
+
 
 export default class Map extends Component {
   constructor(props) {
@@ -14,7 +16,47 @@ export default class Map extends Component {
       position: null,
       selectedPin: undefined,
       dropPinLocation: undefined,
+      loaded: false,
+      friendLocs: {},
+      realtime: false,
     };
+  }
+
+  setListener() {
+    console.log('setting listener')
+    const { friends } = this.props;
+    let self = this;
+    let counter = 0;  
+    for(var friend in friends) {
+      currLoc.child(friends[friend].id).on("value", (snap) => {
+        self.state.friendLocs[friends[friend].id] = snap.val();
+      });
+      
+      counter++;
+    }
+    if(counter === Object.keys(friends).length) {
+      console.log('loaded is true')
+      this.setState({loaded: true});
+    }
+  }
+
+  renderFriends() {
+    // renders friends current locations
+    console.log('render friends')
+    const { friends } = this.props;
+    let copy = this.state.friendLocs;
+    return _.map(copy, (coords, id) => {
+      console.log('coords', coords)
+        return (
+        <MapView.Marker
+          coordinate={coords}
+          key={id}
+          image={{uri: friends[id].picture}}
+          style={styles.icon}
+        />
+
+        )
+      });
   }
 
   onRegionChange(region) {
@@ -46,8 +88,9 @@ export default class Map extends Component {
   
   renderMarkers() {
     const { pins, targetPin } = this.props;
-
+    console.log('render markers')
     return _.map(pins, (pinObject, key) => {
+
       let image = baseImg;
       if ( key === targetPin.id ) {
         image = targetImg;
@@ -103,7 +146,8 @@ export default class Map extends Component {
 
 
   render() {
-    const { pins, getLocationToSave, currLoc, recent } = this.props;
+    // TODO: Map is re-rendering continually. Fix bug
+    const { pins, getLocationToSave, currLoc, recent, friends } = this.props;
     return (
       <View style={styles.container}>
         <MapView
@@ -122,14 +166,25 @@ export default class Map extends Component {
           }
         >
         { Object.keys(pins).length !== 0 ? this.renderMarkers.call(this) : void 0 }
+
+        { this.state.loaded === true && this.state.realtime === true ? this.renderFriends.call(this) : void 0 }
+
         </MapView>
         { this.state.selectedPin ? this.renderEditButton.call(this) : void 0 }
         <View style={styles.centerButton}>
           <Button
             style={[styles.bubble, styles.button]}
-            onPress={this.moveMapToUser.bind(this, this.props.fullLoc)}>
+            onPress={this.moveMapToUser.bind(this)}>
             CENTER ON ME
           </Button>
+          <Button
+            style={[styles.bubble, styles.button]}
+            onPress={() => {
+              this.setListener.call(this);
+              this.setState({realtime: true})
+            }}>
+            RTC
+            </Button>
         </View>
       </View>
     )
@@ -176,6 +231,11 @@ const styles = StyleSheet.create({
   button: {
     width: 200,
     alignItems: 'center',
+  },
+
+  icon: {
+    borderRadius: 13,
+    backgroundColor: 'transparent',
   },
 });
 

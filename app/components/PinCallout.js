@@ -38,20 +38,4 @@ var styles = StyleSheet.create({
   amount: {
     flex: 0.5,
   },
-  arrow: {
-    backgroundColor: 'transparent',
-    borderWidth: 16,
-    borderColor: 'transparent',
-    borderTopColor: '#ACB5B5',
-    alignSelf: 'center',
-    marginTop: -24,
-  },
-  arrowBorder: {
-    backgroundColor: 'transparent',
-    borderWidth: 16,
-    borderColor: 'transparent',
-    borderTopColor: '#ACB5B5',
-    alignSelf: 'center',
-    marginTop: -0.5,
-  },
 });

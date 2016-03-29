@@ -10,6 +10,7 @@ import ViewContainer from '../components/ViewContainer';
 
 
 function mapStateToProps(state) {
+  console.log(state.user,'state.user')
   return {
     pins: state.pins,
     recent: state.recent,

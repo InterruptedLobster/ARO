@@ -46,6 +46,7 @@ export default class PinListItem extends Component {
   shareWithFriend( pin, friend ) {
     const { user } = this.props;
     if( typeof user.id !== 'string' ) {
+      console.log(user.id)
       console.log( 'shareWithFriend: user id must be a string' );
       return null;
     }
@@ -62,7 +63,7 @@ export default class PinListItem extends Component {
       return null;
     }
     // Make a copy of the pin
-    var pinCopy = Object.assign({}, pin);
+    var pinCopy = Object.assign({},{alertedYet: false}, pin);
     // Set pin.friend to the userID of the person sending the pin
     pinCopy.friend = user;
     // Post the pin to the friend's firebase.

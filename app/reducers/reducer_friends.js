@@ -1,6 +1,6 @@
 import { UPDATE_FRIENDS } from '../constants/constants.js';
 
-var initialState = [];
+var initialState = {};
 
 export default function(state = initialState, action) {
   switch(action.type){

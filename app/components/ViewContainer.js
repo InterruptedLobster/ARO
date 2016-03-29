@@ -4,6 +4,7 @@ import Map from './Map';
 import DropNewPinButton from '../containers/container_dropNewPin';
 import PinList from './PinList';
 import Button from 'react-native-button';
+import { myCurrLoc } from '../lib/db/db';
 
 export default class ViewContainer extends Component {
 
@@ -30,9 +31,9 @@ export default class ViewContainer extends Component {
         var coords = {};
         coords.longitude = position.coords.longitude;
         coords.latitude = position.coords.latitude;
-        this.setState({
-          currLoc: coords
-        });
+        this.setState({currLoc: coords});
+        // update firebase with current location
+        myCurrLoc.update(coords);
       },
       (error) => {
         alert(error.message);
@@ -46,6 +47,8 @@ export default class ViewContainer extends Component {
         coords.longitude = position.coords.longitude;
         coords.latitude = position.coords.latitude;
         this.setState({currLoc: coords});
+        // update firebase with current location
+        myCurrLoc.update(coords);
       }
     );
   }
@@ -70,6 +73,7 @@ export default class ViewContainer extends Component {
           updatePins={updatePins}
           updateRecent={updateRecent}
           deletePin={deletePin}
+          friends={friends}
           targetPin={targetPin}
           setTarget={setTarget}
         /> : void 0 }
