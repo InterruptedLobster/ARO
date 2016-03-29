@@ -144,6 +144,21 @@ export default class AR extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.watchID = navigator.geolocation.watchPosition(
+      (position) => {
+        var coords = {};
+        coords.longitude = position.coords.longitude;
+        coords.latitude = position.coords.latitude;
+        this.sendLocsToBridge.call(this, coords);
+      }
+    );
+  }
+  componentWillUnmount(){
+    navigator.geolocation.clearWatch(
+      this.watchID
+    )
+  }
   calculateLocs( currentLocation, objectOfPins ) {
     var locs = [];
     // For each pin in the array of pins,
@@ -155,30 +170,35 @@ export default class AR extends Component {
     return locs;
   }
 
-  sendLocsToBridge( props ) {
+  sendLocsToBridge( coordinates ) {
     let message = {}
-    const { currLoc, pins, targetPin } = props;
+    const { pins, targetPin } = this.props;
     message.targetPinId = targetPin.id;
-    message.locs = this.calculateLocs( currLoc, pins );
+    message.locs = this.calculateLocs( coordinates, pins );
     this.refs.webviewbridge.sendToBridge( JSON.stringify( message ) );
   }
 
   onBridgeMessage( message ) {
     if( message === "BRIDGE_READY" ) {
-      this.sendLocsToBridge( this.props );
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          var coords = {};
+          coords.longitude = position.coords.longitude;
+          coords.latitude = position.coords.latitude;
+          this.sendLocsToBridge.call(this, coords)
+        },
+        (error) => {
+          alert(error.message);
+        },
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+      );
     }
-  }
-
-  // TODO: When we receive a new state, we should recalculate the rendered pins and send them to the webview.
-  componentDidUpdate( prevProps ) {
-    this.sendLocsToBridge( prevProps );
   }
 
   render() {
     return (
-
-      <View 
-        style={styles.container} 
+      <View
+        style={styles.container}
       >
         <Camera
           ref={(cam) => {

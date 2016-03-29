@@ -11,11 +11,7 @@ export default class ViewContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'map',
-      currLoc: {
-        latitude: 37.7835551,
-        longitude: -122.4089013,
-      },
+      view: 'map'
     };
   }
 
@@ -25,48 +21,19 @@ export default class ViewContainer extends Component {
     updateRecent();
   }
 
-  componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        var coords = {};
-        coords.longitude = position.coords.longitude;
-        coords.latitude = position.coords.latitude;
-        this.setState({currLoc: coords});
-        // update firebase with current location
-        myCurrLoc.update(coords);
-      },
-      (error) => {
-        alert(error.message);
-      },
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    );
-
-    this.watchID = navigator.geolocation.watchPosition(
-      (position) => {
-        var coords = {};
-        coords.longitude = position.coords.longitude;
-        coords.latitude = position.coords.latitude;
-        this.setState({currLoc: coords});
-        // update firebase with current location
-        myCurrLoc.update(coords);
-      }
-    );
-  }
-
   toggleView(view) {
     this.setState({ view });
   }
 
   render() {
-    const { pins, recent, friends, user, targetPin, getLocationToSave, updatePins, updateRecent, deletePin, setTarget } = this.props;
-    
+    const { pins, recent, friends, user, targetPin, getLocationToSave, updatePins, updateRecent, deletePin, setTarget, clearTarget } = this.props;
+
     return (
 
       <View style={{flex: 1}}>
-      { this.state.view === 'ar' ? <AR currLoc={ this.state.currLoc } pins={pins} targetPin={targetPin} /> : void 0 }
+      { this.state.view === 'ar' ? <AR pins={pins} targetPin={targetPin} /> : void 0 }
       { this.state.view === 'map' ? <Map
           getLocationToSave={getLocationToSave}
-          currLoc={this.state.currLoc}
           initialLoc={this.state.initialLoc}
           pins = {pins}
           recent = {recent}
@@ -76,6 +43,7 @@ export default class ViewContainer extends Component {
           friends={friends}
           targetPin={targetPin}
           setTarget={setTarget}
+          clearTarget={clearTarget}
         /> : void 0 }
       { this.state.view === 'list' ? <PinList
           deletePin={deletePin}
