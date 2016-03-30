@@ -227,14 +227,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: 'transparent',
     left: Dimensions.get('window').width/2 - 75,
-    bottom: 90,
+    bottom: 100,
   },
 
   centerButton: {
     position: 'absolute',
     backgroundColor: 'transparent',
     left: Dimensions.get('window').width/2 - 100,
-    bottom: 40,
+    bottom: 50,
     borderRadius: 10,
   },
 
