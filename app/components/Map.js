@@ -53,7 +53,7 @@ export default class Map extends Component {
   renderFriends() {
     const { friends } = this.props;
     let copy = this.state.friendLocs;
-    
+
     // renders friends current locations
     return _.map(copy, (coords, id) => {
         return (
@@ -181,9 +181,7 @@ export default class Map extends Component {
         <MapView
           ref="map"
           showsUserLocation={true}
-          //TODO: find a better way to show map initially, added below line so it would stop zooming in from world view
-          //TODO: initial region is optional, which one do you guys think is smoother?
-          // initialRegion={{ longitudeDelta: 0.005, latitude: currLoc.latitude,longitude: currLoc.longitude, latitudeDelta: 0.005 }}
+-         initialRegion={{ longitudeDelta: 0.005, latitude: currLoc.latitude,longitude: currLoc.longitude, latitudeDelta: 0.005 }}
           region={this.state.position}
           style={styles.map}
           showsCompass={true}
@@ -193,7 +191,7 @@ export default class Map extends Component {
             }
           }
         >
-        
+
         { Object.keys(pins).length !== 0 ? this.renderMarkers.call(this) : void 0 }
 
         { this.state.loaded === true ? this.renderFriends.call(this) : void 0 }
