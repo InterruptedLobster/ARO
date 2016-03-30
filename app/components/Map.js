@@ -43,6 +43,7 @@ export default class Map extends Component {
     }
   }
 
+  //gets location of user upon map view render
   componentDidMount() {
     geoAction.getCurrent((loc)=>{
       this.refs.map.animateToRegion(loc, 100);
@@ -73,13 +74,15 @@ export default class Map extends Component {
   }
 
 
+
+  //saves title and pin when saving pin by clicking point on map
   setPinTitle(title) {
     const { getLocationToSave, recent } = this.props;
 
     getLocationToSave(this.state.dropPinLocation, recent, title);
     this.setState({dropPinLocation: undefined});
   }
-
+  //will prompt user to title pin if user saves pin by clicking point on map
   dropPin(coordinate) {
     this.setState({dropPinLocation: coordinate});
     AlertIOS.prompt(
@@ -97,6 +100,7 @@ export default class Map extends Component {
       );
   }
 
+  //centers map onto user location whenever "center on me" is pressed
   moveMapToUser() {
     var self = this;
     geoAction.getCurrent((loc) =>{
@@ -112,6 +116,7 @@ export default class Map extends Component {
     this.refs.map.animateToRegion(goTo, 100);
   }
 
+  //renders markers for each pin saved
   renderMarkers() {
     const { pins, targetPin } = this.props;
 
@@ -133,7 +138,6 @@ export default class Map extends Component {
               <Text style={{ color: 'black', alignSelf:'center', fontSize:16 }}>{pinObject.title}</Text>
             </PinCallout>
           </MapView.Callout>
-
         </MapView.Marker>
       );
     });
