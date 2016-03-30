@@ -65,9 +65,8 @@ export default class PinList extends Component {
     }
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(newPins)
-    })
+    });
   }
-
 
   renderItem(pin) {
     const { updatePins, updateRecent, deletePin, setTarget, targetPin, friends, user } = this.props;

@@ -13,7 +13,7 @@ export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      position: null,
+      // position: null,
       selectedPin: undefined,
       dropPinLocation: undefined,
       loaded: false,
@@ -50,11 +50,11 @@ export default class Map extends Component {
     });
   }
 
+  //renders friends current locations
   renderFriends() {
     const { friends } = this.props;
     let copy = this.state.friendLocs;
-    
-    // renders friends current locations
+
     return _.map(copy, (coords, id) => {
         return (
           <MapView.Marker
@@ -71,6 +71,7 @@ export default class Map extends Component {
       });
   }
 
+  //gets location of user upon map view render
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -90,13 +91,15 @@ export default class Map extends Component {
     );
   }
 
+
+  //saves title and pin when saving pin by clicking point on map
   setPinTitle(title) {
     const { getLocationToSave, recent } = this.props;
 
     getLocationToSave(this.state.dropPinLocation, recent, title);
     this.setState({dropPinLocation: undefined});
   }
-
+  //will prompt user to title pin if user saves pin by clicking point on map
   dropPin(coordinate) {
     this.setState({dropPinLocation: coordinate});
     AlertIOS.prompt(
@@ -114,6 +117,7 @@ export default class Map extends Component {
       );
   }
 
+  //renders markers for each pin saved
   renderMarkers() {
     const { pins, targetPin } = this.props;
 
@@ -135,7 +139,6 @@ export default class Map extends Component {
               <Text style={{ color: 'black', alignSelf:'center', fontSize:16 }}>{pinObject.title}</Text>
             </PinCallout>
           </MapView.Callout>
-
         </MapView.Marker>
       );
     });
@@ -159,13 +162,17 @@ export default class Map extends Component {
     )
   }
 
+  //centers map onto user location whenever "center on me" is pressed
   moveMapToUser() {
     const {stateLocation} = this.state;
+
     this.refs.map.animateToRegion(stateLocation, 2500)
   }
 
+  //centers map onto a newly shared pin if user chooses to upon alert notification
   goToTarget(pinObj){
     const {targetPin, clearTarget} = this.props
+
     this.refs.map.animateToRegion(targetPin, 250);
   }
 
@@ -182,7 +189,7 @@ export default class Map extends Component {
           ref="map"
           showsUserLocation={true}
           initialRegion={{ longitudeDelta: 0.005, latitude: currLoc.latitude,longitude: currLoc.longitude, latitudeDelta: 0.005 }}
-          region={this.state.position}
+          // region={this.state.position}
           style={styles.map}
           showsCompass={true}
           onLongPress={ (e) => {
@@ -191,7 +198,7 @@ export default class Map extends Component {
             }
           }
         >
-        
+
         { Object.keys(pins).length !== 0 ? this.renderMarkers.call(this) : void 0 }
 
         { this.state.loaded === true ? this.renderFriends.call(this) : void 0 }

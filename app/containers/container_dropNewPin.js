@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { userData } from '../lib/db/db.js';
 
+//button component that calls action dropNewPin via getLocationToSave
 class DropNewPinButton extends Component {
   constructor(props) {
     super(props);
@@ -34,6 +35,7 @@ class DropNewPinButton extends Component {
   }
 }
 
+//smart container for the button component
 function mapStateToProps(state) {
   return {
     pins: state.pins,

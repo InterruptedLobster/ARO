@@ -27,9 +27,7 @@ export default class ViewContainer extends Component {
 
   render() {
     const { pins, recent, friends, user, targetPin, getLocationToSave, updatePins, updateRecent, deletePin, setTarget, clearTarget } = this.props;
-
     return (
-
       <View style={{flex: 1}}>
       { this.state.view === 'ar' ? <AR pins={pins} targetPin={targetPin} /> : void 0 }
       { this.state.view === 'map' ? <Map

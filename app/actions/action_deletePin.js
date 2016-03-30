@@ -6,13 +6,13 @@ function deletePin(selectedPin) {
     type: DELETE_PIN,
     payload: selectedPin
   };
-};
+}
 
 function updateRecent(payload) {
   return {
     type: UPDATE_RECENT,
     payload
-  }
+  };
 }
 
 function deleteRecentPin(selectedPin, dispatch) {
@@ -33,6 +33,7 @@ function deleteRecentPin(selectedPin, dispatch) {
   });
 }
 
+//finds the pin in db and calls action to delete from store
 export default function (pin) {
     userData.child(pin.id).remove();
   return (dispatch) => {

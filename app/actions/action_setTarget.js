@@ -13,6 +13,7 @@ function clearTarget() {
   };
 }
 
+//this is 'setTarget' called in components
 export default function(pin) {
   return (dispatch) => {
     dispatch(setTarget(pin));

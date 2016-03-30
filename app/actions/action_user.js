@@ -40,12 +40,14 @@ const generateFriends = (friends, token, callback) =>{
   });
 };
 
+//called whenever user logs in
 export const firebase_check = (userCredentials) => {
   let {userId, token} = userCredentials;
   let api = "https://graph.facebook.com/v2.3/"+userId+"?fields=name,email,friends,picture&access_token="+token;
   let friendcall = "https://graph.facebook.com/v2.3/"+userId+"?fields=name,friends&access_token="+token;
   let friendsObj = {};
 
+  // checks to see if user exists in firebase
  const checkIfUserExists = (userId, callback) => {
     ref.once('value', function(snapshot) {
     let userExistsBool = snapshot.hasChild(userId);
@@ -64,12 +66,15 @@ export const firebase_check = (userCredentials) => {
           userInfo.name = responseData.name;
           userInfo.email = responseData.email;
           userInfo.picture = responseData.picture.data.url;
-          //pushes all gathereed infor to database
+
+          //pushes all gathered info to db
           let newUser = ref.child(userId).set(userInfo);
+
           //generates friends for new user
           generateFriends(responseData.friends.data, token, (allFriends)=> {
             dispatch(updateFriends(allFriends));
           });
+
           //logs new user in
           dispatch(logIn(userInfo));
         });
@@ -81,6 +86,7 @@ export const firebase_check = (userCredentials) => {
           let obj = {name, email, id, picture};
           dispatch(logIn(obj));
         });
+
         //this api call to fb updates friends list
         return fetch(friendcall)
         .then((response) => response.json())

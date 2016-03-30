@@ -9,9 +9,9 @@ export default class FriendListItem extends Component {
 
   render() {
     const { friend } = this.props;
-    // const pic = friend.picture; TODO: Add picture and email
+
     return (
-      <TouchableHighlight 
+      <TouchableHighlight
         onPress={() => {
           this.props.onPress( friend );
           // TODO: And then make the friend list go away.
