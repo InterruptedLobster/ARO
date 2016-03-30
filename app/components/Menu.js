@@ -10,6 +10,12 @@ import React, {
   Component,
   PropTypes
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { logOut } from '../actions/action_user';
+import Button from 'react-native-button';
+
+
 const window = Dimensions.get('window');
 const uri = 'http://pickaface.net/includes/themes/clean/img/slide2.png';
 
@@ -43,29 +49,32 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Menu extends Component {
+class Menu extends Component {
 
   render() {
+    const { user, logOut } = this.props;
     return (
       <ScrollView scrollsToTop={false} style={styles.menu}>
         <View style={styles.avatarContainer}>
           <Image
             style={styles.avatar}
-            source={{ uri, }}/>
-          <Text style={styles.name}>Hi, InterruptedLobster!</Text>
+            source={{ uri }}/>
+          {Object.keys(user).length > 1 ? <Text style={styles.name}>Hi,{user.name}!</Text>: <Text> Hi! </Text>}
         </View>
 
-        <Text
-          onPress={() => this.props.onItemSelected('Map')}
-          style={styles.item}>
-          Map
-        </Text>
 
         <Text
           onPress={() => this.props.onItemSelected('Settings')}
           style={styles.item}>
           Settings
         </Text>
+
+        <Button
+          onPress={() => logOut()}
+          style={styles.item}>
+          Log Out
+        </Button>
+
       </ScrollView>
     );
   }
@@ -73,4 +82,11 @@ export default class Menu extends Component {
 
 Menu.propTypes = {
     onItemSelected: PropTypes.func.isRequired,
-  };
+};
+
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+export default connect(mapStateToProps, {logOut})(Menu);
