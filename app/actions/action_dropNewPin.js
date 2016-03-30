@@ -30,6 +30,7 @@ function checkRecent(current = [], id) {
   }
 }
 
+//called whenever a pin is saved
 export default function getLocationToSave(location, current, pinTitle) {
   function getLocationHelper(loc, title, dispatch){
     let coords = {}, recent;
