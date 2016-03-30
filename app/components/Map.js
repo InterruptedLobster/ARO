@@ -16,7 +16,7 @@ import targetImg from '../assets/blackPin.png';
 import { PinCallout } from './PinCallout';
 import PinEditButton from './PinEditButton';
 import { myCurrLoc, currLoc } from '../lib/db/db';
-import * as geoAction from './utils';
+import * as geoAction from '../lib/utils';
 
 
 export default class Map extends Component {
@@ -52,9 +52,10 @@ export default class Map extends Component {
   }
 
   componentDidMount() {
-    this.getCurrentLocation( (coords) => {
-      this.setState({
-        stateLocation: coords
+    var self = this;
+    geoAction.getCurrent((loc)=>{
+      self.setState({
+         stateLocation:loc
       });
     });
   }
@@ -67,24 +68,7 @@ export default class Map extends Component {
       self.state.friendLocs[friend.id] = snap.val();
     });
   }
-        
-  getCurrentLocation(callback) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        var coords = {};
-        coords.longitude = position.coords.longitude;
-        coords.latitude = position.coords.latitude;
-        coords.longitudeDelta = 0.005;
-        coords.latitudeDelta = 0.005;
-        callback(coords);
-      },
-      (error) => {
-        alert(error.message);
-      },
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    );
-    
-  }
+
 
   setPinTitle(title) {
     const { getLocationToSave, recent } = this.props;
@@ -111,8 +95,9 @@ export default class Map extends Component {
   }
 
   moveMapToUser() {
-    this.getCurrentLocation( (coords) => {
-      this.refs.map.animateToRegion(coords, 100);
+    var self = this;
+    geoAction.getCurrent((loc) =>{
+      self.refs.map.animateToRegion(loc, 100);
     });
   }
 
@@ -120,7 +105,7 @@ export default class Map extends Component {
     const {targetPin, clearTarget} = this.props
     this.refs.map.animateToRegion(targetPin, 100);
   }
-  
+
   renderMarkers() {
     const { pins, targetPin } = this.props;
 

@@ -23,6 +23,8 @@ export const setWatch = (callback) => {
       var coords = {};
       coords.longitude = position.coords.longitude;
       coords.latitude = position.coords.latitude;
+      coords.longitudeDelta = 0.005;
+      coords.latitudeDelta = 0.005;
       callback(coords);
     }
   );
