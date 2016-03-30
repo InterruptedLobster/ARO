@@ -47,6 +47,7 @@ class DropNewPinButton extends Component {
   }
 }
 
+//smart container for the button component
 function mapStateToProps(state) {
   return {
     pins: state.pins,
