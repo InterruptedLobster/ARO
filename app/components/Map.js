@@ -13,7 +13,7 @@ export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      position: null,
+      // position: null,
       selectedPin: undefined,
       dropPinLocation: undefined,
       loaded: false,
@@ -189,7 +189,7 @@ export default class Map extends Component {
           ref="map"
           showsUserLocation={true}
           initialRegion={{ longitudeDelta: 0.005, latitude: currLoc.latitude,longitude: currLoc.longitude, latitudeDelta: 0.005 }}
-          region={this.state.position}
+          // region={this.state.position}
           style={styles.map}
           showsCompass={true}
           onLongPress={ (e) => {
