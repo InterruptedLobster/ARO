@@ -30,7 +30,7 @@ export const setWatch = (callback) => {
   );
 };
 
-export const clearWatch = (watchID, callback) => {
+export const clearWatch = (watchID) => {
   navigator.geolocation.clearWatch(
     watchID
   );
