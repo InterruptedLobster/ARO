@@ -1,8 +1,6 @@
 import React, {
   Component,
   StyleSheet,
-  Image,
-  Text,
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
