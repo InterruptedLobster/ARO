@@ -5,6 +5,8 @@ import THREE_RENDER_MARKER from '../lib/threejs/marker.js';
 import THREE_RENDER_TEXT from '../lib/threejs/text.js';
 import HANDLE_ORIENTATION from '../lib/orientation/orientationHandler.js';
 import Location from '../lib/orientation/locationMath.js';
+import * as geoAction from '../lib/orientation/utils';
+
 import _ from 'underscore';
 const REF_WEBVIEW_BRIDGE = 'webviewbridge';
 
@@ -145,19 +147,13 @@ export default class AR extends Component {
   }
 
   componentDidMount() {
-    this.watchID = navigator.geolocation.watchPosition(
-      (position) => {
-        var coords = {};
-        coords.longitude = position.coords.longitude;
-        coords.latitude = position.coords.latitude;
-        this.sendLocsToBridge.call(this, coords);
-      }
-    );
+    var self = this;
+    this.watchID = geoAction.setWatch((loc) =>{
+      self.sendLocsToBridge.call(self, loc);
+    })
   }
   componentWillUnmount(){
-    navigator.geolocation.clearWatch(
-      this.watchID
-    )
+    geoAction.clearWatch(this.watchID)
   }
   calculateLocs( currentLocation, objectOfPins ) {
     var locs = [];
@@ -180,18 +176,10 @@ export default class AR extends Component {
 
   onBridgeMessage( message ) {
     if( message === "BRIDGE_READY" ) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          var coords = {};
-          coords.longitude = position.coords.longitude;
-          coords.latitude = position.coords.latitude;
-          this.sendLocsToBridge.call(this, coords)
-        },
-        (error) => {
-          alert(error.message);
-        },
-        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-      );
+      var self = this;
+      geoAction.getCurrent((loc)=>{
+        self.sendLocsToBridge.call(self, loc);
+      });
     }
   }
 

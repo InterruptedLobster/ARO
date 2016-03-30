@@ -1,5 +1,6 @@
 import React, {Component, View, ListView} from 'react-native';
 import PinListItem from './PinListItem.js';
+import * as geoAction from '../lib/orientation/utils';
 
 export default class PinList extends Component {
 
@@ -24,30 +25,19 @@ export default class PinList extends Component {
   }
 
   componentWillMount() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        var coords = {};
-        coords.longitude = position.coords.longitude;
-        coords.latitude = position.coords.latitude;
-        this.setState({
-          currLoc: coords
-        });
-      },
-      (error) => {
-        alert(error.message);
-      },
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    );
+    var self = this;
+    geoAction.getCurrent((loc) => {
+      self.setState({
+        currLoc: loc
+      });
+    });
 
-    this.watchID = navigator.geolocation.watchPosition(
-      (position) => {
-        var coords = {};
-        coords.longitude = position.coords.longitude;
-        coords.latitude = position.coords.latitude;
-        this.setState({currLoc: coords});
-        this.redraw();
-      }
-    );
+    this.watchID = geoAction.setWatch((loc)=> {
+      self.setState({
+        currLoc: loc
+      });
+      self.redraw();
+    });
 
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this.props.pins)
@@ -55,7 +45,7 @@ export default class PinList extends Component {
   }
 
   componentWillUnmount() {
-    navigator.geolocation.clearWatch( this.watchID );
+    geoAction.clearWatch(this.watchID);
   }
 
   redraw() {
@@ -65,7 +55,7 @@ export default class PinList extends Component {
     }
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(newPins)
-    })
+    });
   }
 
 

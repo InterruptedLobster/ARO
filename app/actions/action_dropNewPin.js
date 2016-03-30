@@ -1,6 +1,8 @@
 import { DROP_NEW_PIN, UPDATE_RECENT, SET_RECENT} from '../constants/constants';
 import { userData, userRecent } from '../lib/db/db';
 import setTarget from './action_setTarget';
+import * as geoAction from '../lib/orientation/utils';
+
 
 function dropNewPin(payload, id) {
   return {
@@ -51,15 +53,9 @@ export default function getLocationToSave(location, current, pinTitle) {
   }
   return (dispatch) => {
       if(!location) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-             getLocationHelper(position.coords, "My Current Location", dispatch);
-          },
-          (error) => {
-            console.error(error);
-          },
-          {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-        );
+        geoAction.getCurrent((loc)=>{
+          getLocationHelper(position.coords, "My Current Location", dispatch);
+        });
       } else {
         if(pinTitle === '') {
           pinTitle = 'New Totem';
