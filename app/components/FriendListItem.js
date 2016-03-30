@@ -18,7 +18,7 @@ export default class FriendListItem extends Component {
   render() {
     const { friend } = this.props;
     return (
-      <TouchableHighlight 
+      <TouchableHighlight
         onPress={() => {
           this.props.onPress( friend );
           // TODO: And then make the friend list go away.

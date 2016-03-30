@@ -65,7 +65,6 @@ export default class PinList extends Component {
     });
   }
 
-
   renderItem(pin) {
     const { updatePins, updateRecent, deletePin, setTarget, targetPin, shareWithFriend, friends, user } = this.props;
     return (
