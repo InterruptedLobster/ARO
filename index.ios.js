@@ -20,6 +20,7 @@ import { Router, Scene, Actions} from 'react-native-router-flux';
 
 //creates logger
 const logger = createLogger();
+
 // creates store
 const store = createStore(
   rootReducer,
@@ -39,4 +40,5 @@ const scenes = Actions.create(
       <Scene key="friends" component={FriendList} />
   </Scene>
 );
+
 AppRegistry.registerComponent('findAR', () => findAR);
