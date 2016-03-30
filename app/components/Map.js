@@ -218,7 +218,6 @@ export default class Map extends Component {
         <MapView
           ref="map"
           showsUserLocation={true}
--         initialRegion={{ longitudeDelta: 0.005, latitude: currLoc.latitude,longitude: currLoc.longitude, latitudeDelta: 0.005 }}
           region={this.state.position}
           style={styles.map}
           showsCompass={true}
