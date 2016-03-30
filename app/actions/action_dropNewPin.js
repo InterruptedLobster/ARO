@@ -1,7 +1,7 @@
 import { DROP_NEW_PIN, UPDATE_RECENT, SET_RECENT} from '../constants/constants';
 import { userData, userRecent } from '../lib/db/db';
 import setTarget from './action_setTarget';
-import * as geoAction from '../lib/utils';
+import * as geoAction from '../lib/orientation/utils';
 
 
 function dropNewPin(payload, id) {

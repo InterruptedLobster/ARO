@@ -5,7 +5,7 @@ import THREE_RENDER_MARKER from '../lib/threejs/marker.js';
 import THREE_RENDER_TEXT from '../lib/threejs/text.js';
 import HANDLE_ORIENTATION from '../lib/orientation/orientationHandler.js';
 import Location from '../lib/orientation/locationMath.js';
-import * as geoAction from '../lib/utils';
+import * as geoAction from '../lib/orientation/utils';
 
 import _ from 'underscore';
 const REF_WEBVIEW_BRIDGE = 'webviewbridge';
