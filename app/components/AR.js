@@ -148,8 +148,7 @@ export default class AR extends Component {
 
   componentDidMount() {
     var self = this;
-    console.log('this is nav actions', geoAction)
-    this.watchID = geoAction.setWatch(function(loc) {
+    this.watchID = geoAction.setWatch((loc) =>{
       self.sendLocsToBridge.call(self, loc);
     })
   }
