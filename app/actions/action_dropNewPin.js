@@ -11,12 +11,15 @@ function dropNewPin(payload, id) {
     payload
   };
 }
+
 function setRecent(payload) {
   return {
     type: SET_RECENT,
     payload
   };
 }
+
+//checks length of recent pins array in store
 function checkRecent(current = [], id) {
   var updated;
   if(!Array.isArray(current)) {
@@ -34,6 +37,8 @@ function checkRecent(current = [], id) {
 
 //called whenever a pin is saved
 export default function getLocationToSave(location, current, pinTitle) {
+
+  //abstracted helper function for pins saved through clicking anywhere on map or dropping on current location
   function getLocationHelper(loc, title, dispatch){
     let recent;
     loc.title = title;
@@ -50,6 +55,7 @@ export default function getLocationToSave(location, current, pinTitle) {
     dispatch(setRecent(recent));
     userRecent.set(recent);
   }
+
   return (dispatch) => {
       if(!location) {
         geoAction.getCurrent((loc)=>{
