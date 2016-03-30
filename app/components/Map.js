@@ -72,6 +72,14 @@ export default class Map extends Component {
   }
 
   componentDidMount() {
+    this.getCurrentLocation( (coords) => {
+      this.setState({
+        stateLocation: coords
+      });
+    });
+  }
+
+  getCurrentLocation(callback) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         var coords = {};
@@ -79,16 +87,33 @@ export default class Map extends Component {
         coords.latitude = position.coords.latitude;
         coords.longitudeDelta = 0.005;
         coords.latitudeDelta = 0.005;
-        this.setState({
-          stateLocation: coords
-        });
+        callback(coords);
       },
       (error) => {
         alert(error.message);
       },
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
     );
+
   }
+
+  renderFriends() {
+    // renders friends current locations
+    const { friends } = this.props;
+    let copy = this.state.friendLocs;
+    return _.map(copy, (coords, id) => {
+        return (
+        <MapView.Marker
+          coordinate={coords}
+          key={id}
+          image={{uri: friends[id].picture}}
+          style={styles.icon}
+        />
+
+        )
+      });
+  }
+
 
   setPinTitle(title) {
     const { getLocationToSave, recent } = this.props;
@@ -160,8 +185,9 @@ export default class Map extends Component {
   }
 
   moveMapToUser() {
-    const {stateLocation} = this.state;
-    this.refs.map.animateToRegion(stateLocation, 2500)
+    this.getCurrentLocation( (coords) => {
+      this.refs.map.animateToRegion(coords, 300);
+    });
   }
 
   goToTarget(pinObj){
