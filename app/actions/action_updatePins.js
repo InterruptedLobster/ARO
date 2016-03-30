@@ -44,7 +44,7 @@ export default function(pin, newTitle) {
             {text: 'OK', onPress: () => console.log('OK Pressed')},
           ]);
 
-          //once alerted, yet alertedYet to true so it doesn't alert again
+          //once alerted, set alertedYet to true so it doesn't alert again
           userData.child(sharedPin.id).update({alertedYet: true});
         }
     });

@@ -67,7 +67,7 @@ export const firebase_check = (userCredentials) => {
           userInfo.email = responseData.email;
           userInfo.picture = responseData.picture.data.url;
 
-          //pushes all gathereed infor to database
+          //pushes all gathered info to db
           let newUser = ref.child(userId).set(userInfo);
 
           //generates friends for new user
