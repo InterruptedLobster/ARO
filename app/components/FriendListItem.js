@@ -9,7 +9,6 @@ export default class FriendListItem extends Component {
 
   render() {
     const { friend } = this.props;
-    // const pic = friend.picture; TODO: Add picture and email
 
     return (
       <TouchableHighlight

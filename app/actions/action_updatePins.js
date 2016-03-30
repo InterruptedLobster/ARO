@@ -32,7 +32,7 @@ export default function(pin, newTitle) {
         if (sharedPin.alertedYet !== null && sharedPin.alertedYet === false) {
           var message = sharedPin.friend.name + " shared a pin with you!";
 
-          //set up info for if user choose to go to the newly shared pin
+          //if user chooses to go to the newly shared pin, this obj will be passed in to set new targetPin
           var targetRecentlyShared = {};
           targetRecentlyShared.id = sharedPin.id;
           targetRecentlyShared.longitude = sharedPin.longitude;
