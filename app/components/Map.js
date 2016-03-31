@@ -59,8 +59,10 @@ export default class Map extends Component {
 
   componentWillUpdate(nextProps) {
     const {targetPin} = nextProps;
-    if(targetPin.longitude) {
-      this.goToTarget.call(this, targetPin);
+    if(this.props.targetPin.id !== targetPin.id) {
+      if(targetPin.longitude) {
+        this.goToTarget.call(this, targetPin);
+      }
     }
   }
 
@@ -121,7 +123,7 @@ export default class Map extends Component {
   }
 
   goToTarget(pinObj){
-    const {targetPin, clearTarget} = this.props
+    const {targetPin, clearTarget} = this.props;
     this.refs.map.animateToRegion(targetPin, 100);
   }
 
@@ -201,7 +203,7 @@ export default class Map extends Component {
           ref="map"
           showsUserLocation={true}
           initialRegion={stateLocation}
-          region={stateLocation}
+          region = {targetPin.longitude ? targetPin: stateLocation }
           style={styles.map}
           showsCompass={true}
           onLongPress={ (e) => {
