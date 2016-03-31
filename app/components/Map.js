@@ -15,7 +15,6 @@ import baseImg from '../assets/redPin.png';
 import targetImg from '../assets/blackPin.png';
 import { PinCallout } from './PinCallout';
 import PinEditButton from './PinEditButton';
-import { myCurrLoc, currLoc } from '../lib/db/db';
 import * as geoAction from '../lib/orientation/utils';
 
 
@@ -60,6 +59,16 @@ export default class Map extends Component {
     });
   }
 
+  componentWillUpdate(nextProps) {
+    const { targetPin } = nextProps;
+    if(targetPin.longitude) {
+      this.goToTarget.call(this, targetPin);
+      this.setState({
+        stateLocation: targetPin
+      });
+    }
+  }
+
   setListener(friend) {
     let self = this;
     // sets a firebase listener on each friend
@@ -68,7 +77,6 @@ export default class Map extends Component {
       self.state.friendLocs[friend.id] = snap.val();
     });
   }
-
 
   setPinTitle(title) {
     const { getLocationToSave, recent } = this.props;
@@ -177,9 +185,6 @@ export default class Map extends Component {
     const { pins, getLocationToSave, recent, targetPin, friends } = this.props;
     const { stateLocation } = this.state;
 
-    if(targetPin.longitude) {
-      this.goToTarget.call(this, targetPin);
-    }
     return (
       <View style={styles.container}>
         <MapView
@@ -199,10 +204,10 @@ export default class Map extends Component {
         { Object.keys(pins).length !== 0 ? this.renderMarkers.call(this) : void 0 }
 
         { this.state.loaded === true ? this.renderFriends.call(this) : void 0 }
-
         </MapView>
 
         { this.state.selectedPin ? this.renderEditButton.call(this) : void 0 }
+
 
         <View style={styles.centerButton}>
           <Button

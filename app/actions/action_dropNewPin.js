@@ -34,27 +34,25 @@ function checkRecent(current = [], id) {
 
 export default function getLocationToSave(location, current, pinTitle) {
   function getLocationHelper(loc, title, dispatch){
-    let coords = {}, recent;
-     coords.longitude = loc.longitude;
-     coords.latitude = loc.latitude;
-     coords.title = title;
-     // this assigns pushedObj to added pin object while adding to db
-     let pushedObj = userData.push(coords);
-     coords.id = pushedObj.key();
-     // this adds the 'key' as a key-value pair in the pin object
-     pushedObj.update({"id": pushedObj.key()});
-     dispatch(dropNewPin(coords, pushedObj.key()));
-     // set the target to the most recently dropped pin
-     dispatch(setTarget(coords));
-     // this updates the recent pins state
-     recent = checkRecent(current, coords.id);
-     dispatch(setRecent(recent));
-     userRecent.set(recent);
+    let recent;
+    loc.title = title;
+    // this assigns pushedObj to added pin object while adding to db
+    let pushedObj = userData.push(loc);
+    loc.id = pushedObj.key();
+    // this adds the 'key' as a key-value pair in the pin object
+    pushedObj.update({"id": pushedObj.key()});
+    dispatch(dropNewPin(loc, pushedObj.key()));
+    // set the target to the most recently dropped pin
+    dispatch(setTarget(loc));
+    // this updates the recent pins state
+    recent = checkRecent(current, loc.id);
+    dispatch(setRecent(recent));
+    userRecent.set(recent);
   }
   return (dispatch) => {
       if(!location) {
         geoAction.getCurrent((loc)=>{
-          getLocationHelper(position.coords, "My Current Location", dispatch);
+          getLocationHelper(loc, "My Current Location", dispatch);
         });
       } else {
         if(pinTitle === '') {
