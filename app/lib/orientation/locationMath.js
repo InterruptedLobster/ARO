@@ -1,8 +1,44 @@
+/*
+  Location
+
+  Constants:
+    EARTH_RADIUS_IN_FEET
+
+  Methods:
+    locDegreesToKilometers( degrees )
+      Returns degrees converted to kilometers
+    locDegreesToFeet( degrees )
+      Returns degrees converted to feet
+    haversine( start, end, R )
+      start -- object with longitude and latitude
+      end -- object with longitude and latitude
+      R -- number referring to radius of planet
+      Returns distance between two points taking radius of planet into account.
+    haversineFeet( start, end )
+      start -- object with longitude and latitude
+      end -- object with longitude and latitude
+      Returns distance between two points taking radius of earth in feet into account.
+    pythag( start, end )
+      start -- object with longitude and latitude
+      end -- object with longitude and latitude
+      Returns distance between two points using pythagorean theorem.
+    bearing( x, z )
+      Given relative coordinates of an object from 0, 0,
+      Returns the direction of those coordinates
+    relativeLocsInFeet( start, end )
+      start -- object with longitude and latitude
+      end -- object with longitude and latitude
+      Returns a new object that inherits
+        end.id
+        end.title
+      and generates end.x and end.z as relative coordinates
+      assuming start is at 0, 0, and converting longitude
+      and latitude to feet
+
+*/
 let Location = {};
 
   Location.EARTH_RADIUS_IN_FEET = 5280 * 3961; // feet times miles
-
-  Location.SF_MAGNETIC
   
   Location.locDegreesToKilometers = function ( degrees ) {
     const kmPerNinety = 10000/90;
