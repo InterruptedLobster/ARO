@@ -31,10 +31,9 @@ export default function(pin, newTitle) {
           targetRecentlyShared.id = sharedPin.id;
           targetRecentlyShared.longitude = sharedPin.longitude;
           targetRecentlyShared.latitude = sharedPin.latitude;
-          console.log(targetRecentlyShared, 'this is target recently shared');
+
           Alert.alert(message, null,
           [
-            {text: 'Show me shared pin!', onPress: () => dispatch(setTarget(targetRecentlyShared))},
             {text: 'OK', onPress: () => console.log('OK Pressed')},
           ]);
           //once alerted, yet alertedYet to true so it doesn't alert again
