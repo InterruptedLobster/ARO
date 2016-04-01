@@ -96,6 +96,8 @@ findAR/                                # Root Directory
     </Router>
   </Provider>
 ```
+## React Component Diagram ( View Scene )
+![Component Diagram](http://interruptedlobster.github.io/assets/view_scene.png)
 
 ## Firebase Schema
 
