@@ -1,3 +1,9 @@
+/*
+    THREE_RENDER_TEXT
+    This script inserts a function called createTextModel that builds a 3D card for some text.
+    It does not add the model to the scene.
+    Its intended purpose is to provide captions for the pins rendered in AR view.
+*/
 const THREE_RENDER_TEXT = `
 <script src="http://mrdoob.github.com/three.js/examples/fonts/helvetiker_regular.typeface.js"></script>
 <script>

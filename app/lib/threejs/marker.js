@@ -1,3 +1,10 @@
+/*
+    THREE_RENDER_MARKER
+    This script is injected into the WebView bridge that is rendered over top of the camera display.
+    This script is responsible for generating the 3D environment using THREE.js,
+    as well as building the 3d model for the pin that is used in the AR view
+*/
+
 const THREE_RENDER_MARKER = `
   <script>
     var camera, scene, renderer;
