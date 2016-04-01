@@ -13,7 +13,8 @@ function clearTarget() {
   };
 }
 
-//this is 'setTarget' called in components
+//this is invoked as 'setTarget' in components
+//the store's targetPin will be updated as the pin passed in
 export default function(pin) {
   return (dispatch) => {
     dispatch(setTarget(pin));

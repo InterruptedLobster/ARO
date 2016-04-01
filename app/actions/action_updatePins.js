@@ -16,7 +16,12 @@ function setTarget(payload) {
   };
 }
 
-//this is "updatePins" called in components
+//this is invoked as "updatePins" in components
+//if arguments are passed in, it will update the existing pin in db to have a new title
+//if no arguments are passed in, it is used in viewContainer as a way to update all the pins when you reload/change causes view container to render
+//it contains a listener inside which checks for when friends share their pins and the user's db changes
+//when redux state changes, this function makes sure pins is up to date
+
 export default function(pin, newTitle) {
   if(arguments.length === 2) {
     pin.title = newTitle;
@@ -38,6 +43,7 @@ export default function(pin, newTitle) {
           targetRecentlyShared.longitude = sharedPin.longitude;
           targetRecentlyShared.latitude = sharedPin.latitude;
 
+          //alert that pops up with choice to go to newly shared pin or continue
           Alert.alert(message, null,
           [
             {text: 'Show me shared pin!', onPress: () => dispatch(setTarget(targetRecentlyShared))},
