@@ -1,3 +1,12 @@
+/*
+    HANDLE_ORIENTATION
+    Injected into the WebViewBridge, which is rendered as a transparent window above the camera
+    This script is responsible for translating changes in the device's physical direction
+    to changes in the three dimensional model.
+    It also handles displaying the data for the target pin in AR view, including HTML elements
+    that indicate whether the target pin is to the left or the right of your current view
+*/
+
 const HANDLE_ORIENTATION = `
   <script>
 
