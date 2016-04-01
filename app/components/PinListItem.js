@@ -29,6 +29,7 @@ PROPS:
   currLoc: obj with longitude, latitude that is fetched in PinList and passed down as props
   targetPin: nested object with longitude, latitude, and id
 */
+
 export default class PinListItem extends Component {
 
   constructor(props) {

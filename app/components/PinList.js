@@ -9,6 +9,25 @@ import React, {
 import PinListItem from './PinListItem.js';
 import * as geoAction from '../lib/orientation/utils';
 
+/*
+FUNCTION: component is the container and maps each pin list entry
+METHOD:
+  redraw-- function responsible for updateing pinList after user switches views
+    forces pinList to re-render
+  renderItem-- function responsible for rendring each pin to the list
+    takes in pin obj which has id, longitude, latitude and title
+STATE:
+  currLoc: gets user's current location so that we can show the distance in relation to all the pins on the list
+PROPS:
+  updatePins: nested objects; with friend's user id as key storing object with name, id, and picture
+  updateRecent: function responsible for syncing redux store's recent array with updated db
+  deletePin: function responsible for deleting pin from store and db
+  setTarget: function responsible for setting targetPin, takes in coords obj
+  targetPin: nested object with longitude, latitude, and id
+  shareWithFriend: function responsible for sharing current pin with friend, will post to their db
+  friends: nested objects; with friend's user id as key storing object with name, id, and picture
+  user: object with email, name, id and picture
+*/
 export default class PinList extends Component {
 
   constructor(props) {

@@ -46,6 +46,7 @@ PROPS:
   setTarget: function responsible for setting targetPin, takes in coords obj
   shareWithFriend: function responsible for sharing current pin with friend, will post to their db
 */
+
 export default class Map extends Component {
   constructor(props) {
     super(props);
