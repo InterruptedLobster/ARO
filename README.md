@@ -182,3 +182,6 @@ Store: {
   }
 }
 ```
+
+## Architecture Diagram:
+![Architecture Diagram](http://interruptedlobster.github.io/assets/high-level.png)
