@@ -18,6 +18,34 @@ import PinEditButton from './PinEditButton';
 import * as geoAction from '../lib/orientation/utils';
 import { myCurrLoc, currLoc } from '../lib/db/db';
 
+/*
+FUNCTION: renders the map and contains all the methods that pertains to maps
+  renders markers, invokes callouts, shows target pin
+METHODS:
+  setListener-- function that sets a listener on each friend in db and keeps track of where they are
+  setPinTitle--function responsible for setting pin title and saving that pin when clicking on map
+   takes in string that user inputs
+  dropPin-- function that prompts user to 'setPinTitle' and drops pin when clicking on map
+    takes in an coords object with longitude and latitude
+  moveMapToUser-- function responsible for moving map to user's current location
+  goToTarget-- function responsible centering map on targetPin
+    takes in coords obj with longitude and latitude
+  renderMarkers-- function reponsible for populating map with pins in redux state as markers on a map
+  renderFriends--  function repsonsible for rendering friend's current locations, uses images as markers
+  renderEditButton-- function that renders edit button when user selects pin
+
+PROPS:
+  friends: nested objects; with friend's user id as key storing object with name, id, and picture
+  targetPin: nested object with longitude, latitude, and id
+  getLocationToSave: thunk function that dispatches actions related to saving a pin
+    takes in location coords obj if clicked on map, recent array from store, and title which is a string
+  recent: array of pins ids, static length of 10
+  updateRecent: function responsible for syncing redux store's recent array with updated db
+  deletePin: function responsible for deleting pin from store and db
+    takes in pin obj w id, longitude, latitude and title
+  setTarget: function responsible for setting targetPin, takes in coords obj
+  shareWithFriend: function responsible for sharing current pin with friend, will post to their db
+*/
 export default class Map extends Component {
   constructor(props) {
     super(props);
@@ -113,7 +141,7 @@ export default class Map extends Component {
       latitudeDelta: 0.005,
       longitudeDelta: 0.005
     });
-    this.refs.map.animateToRegion(goTo, 100);
+    this.ref.map.animateToRegion(goTo, 100);
   }
 
   //renders markers for each pin saved
@@ -205,6 +233,7 @@ export default class Map extends Component {
         { Object.keys(pins).length !== 0 ? this.renderMarkers.call(this) : void 0 }
 
         { this.state.loaded === true ? this.renderFriends.call(this) : void 0 }
+
         </MapView>
 
         { this.state.selectedPin ? this.renderEditButton.call(this) : void 0 }

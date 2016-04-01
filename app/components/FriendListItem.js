@@ -8,7 +8,10 @@ import React, {
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
-
+/*
+FUNCTION: represents each friend in your list
+PROPS: obj with id as key, value is object with id, name an picture
+*/
 export default class FriendListItem extends Component {
 
   constructor(props) {

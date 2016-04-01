@@ -22,7 +22,28 @@ const styles = StyleSheet.create({
     backgroundColor: '#2e8b7d',
   },
 });
-
+/*
+FUNCTION: component that holds and renders the different views (AR, map, list)
+METHODS:
+  toggleView-- function that toggles view between ar, map and list
+  sharewithFriend-- function responsible for sharing a pin with friend
+    takes in pin obj and friend obj
+    pin obj has alertedYet: bool, id, longitude, latitude, title
+    friend obj has id, name and picture url
+PROPS:
+  pins: nested object with keys of pin id and id, longitude, latitude and title
+  recent:
+  friends: nested objects; with friend's user id as key storing object with name, id, and picture
+  user: obj with email, picture, name and id
+  targetPin: nested object with longitude, latitude, and id
+  getLocationToSave: thunk function that dispatches actions related to saving a pin
+    takes in location coords obj if clicked on map, recent array from store, and title which is a string
+  updatePins: function responsible for updating the state of pins
+  updateRecent: function responsible for syncing redux store's recent array with updated db
+  deletePin: function responsible for deleting pin from store and db
+  setTarget: function responsible for setting targetPin, takes in coords obj
+  clearTarget: function that can clear targetPin
+*/
 export default class ViewContainer extends Component {
 
   constructor(props) {
