@@ -6,29 +6,13 @@ import PinList from './PinList';
 import Button from 'react-native-button';
 import { ref, myCurrLoc } from '../lib/db/db';
 
-const styles = StyleSheet.create({
-  ViewMenu: {
-    position: 'absolute',
-    top: 25,
-    right: 25,
-    flexDirection: 'row',
-  },
-  ViewButton: {
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    marginRight: 1,
-    color: '#fff',
-    fontWeight: 'bold',
-    backgroundColor: '#2e8b7d',
-  },
-});
 
 export default class ViewContainer extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      view: 'map'
+      view: 'ar'
     };
   }
 
@@ -123,8 +107,25 @@ export default class ViewContainer extends Component {
           List
           </Button> : void 0 }
         </View>
-        <DropNewPinButton/>
+        { this.state.view === 'list' ? null : <DropNewPinButton/>}
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  ViewMenu: {
+    position: 'absolute',
+    top: 28,
+    right: 10,
+    flexDirection: 'row',
+  },
+  ViewButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    marginRight: 1,
+    color: '#fff',
+    fontWeight: 'bold',
+    backgroundColor: '#2e8b7d',
+  },
+});

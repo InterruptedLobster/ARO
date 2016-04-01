@@ -210,7 +210,7 @@ export default class Map extends Component {
           <Button
             style={[styles.bubble, styles.button]}
             onPress={this.moveMapToUser.bind(this)}>
-            Center on me!
+            Center On Me
           </Button>
         </View>
       </View>
@@ -252,12 +252,13 @@ const styles = StyleSheet.create({
   button: {
     width: 200,
     alignItems: 'center',
+    color: '#2e8b7d',
   },
 
   icon: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
     backgroundColor: 'transparent',
   },
 });

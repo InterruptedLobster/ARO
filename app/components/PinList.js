@@ -110,18 +110,20 @@ const style = StyleSheet.create({
     flexDirection: 'column',
   },
   status: {
-    flex: 1,
+    flex: 1.1,
     alignSelf: 'stretch',
     alignItems: 'center',
     backgroundColor: 'white',
     flexDirection: 'column',
     borderRadius: 5,
+    borderBottomWidth: 1,
+    borderColor: '#2e8b7d',
   },
   title: {
     flex: 1,
     flexDirection: 'row',
     alignSelf: 'center',
-    marginTop: 20,
+    marginTop: 24,
   },
   text: {
     fontSize: 26,
@@ -131,6 +133,7 @@ const style = StyleSheet.create({
   },
   list: {
     flex: 9,
+    backgroundColor: '#CAE3E1'
   }
 })
 

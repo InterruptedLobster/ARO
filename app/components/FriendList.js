@@ -75,9 +75,10 @@ const style = StyleSheet.create({
   },
   list: {
     flex: 9,
+    backgroundColor: '#74B7AD',
   },
   status: {
-    flex: 1,
+    flex: 1.1,
     alignSelf: 'stretch',
     alignItems: 'center',
     flexDirection: 'row',
@@ -91,6 +92,8 @@ const style = StyleSheet.create({
   },
   text: {
     fontSize: 26,
+    fontWeight: 'bold',
+    color: '#2e8b7d',
   },
   button: {
     flex: 1,

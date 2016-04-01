@@ -110,10 +110,11 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: '#F4FBFC',
     borderRadius: 4,
     margin: 4,
     padding: 6,
+    borderWidth: 1.5,
   },
   left: {
     flex: 5,
@@ -130,7 +131,7 @@ const style = StyleSheet.create({
     fontSize: 22,
   },
   friend: {
-    backgroundColor: 'lightblue',
+    backgroundColor: '#82B9E1',
   },
   friendName: {
     justifyContent: 'flex-start',
