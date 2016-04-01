@@ -22,13 +22,13 @@ import { myCurrLoc, currLoc } from '../lib/db/db';
 FUNCTION: renders the map and contains all the methods that pertains to maps
   renders markers, invokes callouts, shows target pin
 METHODS:
-  setListener-- function that sets a listener on each friend in db and keeps track of where they are
-  setPinTitle--function responsible for setting pin title and saving that pin when clicking on map
+  setListener(friend)-- function that sets a listener on each friend in db and keeps track of where they are
+  setPinTitle(title)--function responsible for setting pin title and saving that pin when clicking on map
    takes in string that user inputs
-  dropPin-- function that prompts user to 'setPinTitle' and drops pin when clicking on map
+  dropPin(coordinate)-- function that prompts user to 'setPinTitle' and drops pin when clicking on map
     takes in an coords object with longitude and latitude
   moveMapToUser-- function responsible for moving map to user's current location
-  goToTarget-- function responsible centering map on targetPin
+  goToTarget(targetPin)-- function responsible centering map on targetPin
     takes in coords obj with longitude and latitude
   renderMarkers-- function reponsible for populating map with pins in redux state as markers on a map
   renderFriends--  function repsonsible for rendering friend's current locations, uses images as markers

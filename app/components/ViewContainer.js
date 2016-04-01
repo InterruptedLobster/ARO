@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 FUNCTION: component that holds and renders the different views (AR, map, list)
 METHODS:
   toggleView-- function that toggles view between ar, map and list
-  sharewithFriend-- function responsible for sharing a pin with friend
+  sharewithFriend(pin, friend)-- function responsible for sharing a pin with friend
     takes in pin obj and friend obj
     pin obj has alertedYet: bool, id, longitude, latitude, title
     friend obj has id, name and picture url
