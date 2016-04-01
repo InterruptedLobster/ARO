@@ -1,5 +1,10 @@
 import React from 'react-native';
 
+
+/* 
+    getCurrent( callback )
+      callback( {longitude, latitude, longitudeDelta, latitudeDelta} )
+*/
 export const getCurrent = (callback) => {
   navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -17,6 +22,11 @@ export const getCurrent = (callback) => {
     );
 };
 
+/* 
+    setWatch( callback )
+      callback( {longitude, latitude, longitudeDelta, latitudeDelta} )
+      Returns a reference to the position that is constantly updated
+*/
 export const setWatch = (callback) => {
   return navigator.geolocation.watchPosition(
     (position) => {
@@ -29,6 +39,12 @@ export const setWatch = (callback) => {
     }
   );
 };
+
+/* 
+    getCurrent( watchID )
+      Clears the listener on the watchID object, which is expected
+      to be a reference created by navigator.geolocation.watchPosition.
+*/
 
 export const clearWatch = (watchID) => {
   navigator.geolocation.clearWatch(
