@@ -15,6 +15,7 @@ function updateRecent(payload) {
   };
 }
 
+//when user deletes pin it also deletes pin from redux store's recent
 function deleteRecentPin(selectedPin, dispatch) {
   let newRecent;
   userRecent.once("value", (snapshot) => {

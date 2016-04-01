@@ -16,7 +16,7 @@ function setTarget(payload) {
   };
 }
 
-//this is invoked as "updatePins" in components
+//invoked as "updatePins" in components
 //if arguments are passed in, it will update the existing pin in db to have a new title
 //if no arguments are passed in, it is used in viewContainer as a way to update all the pins when you reload/change causes view container to render
 //it contains a listener inside which checks for when friends share their pins and the user's db changes
@@ -29,7 +29,7 @@ export default function(pin, newTitle) {
   }
   return (dispatch) => {
 
-    //this listens and filters for pins that are recently shared by friends
+    //listens and filters for pins that are recently shared by friends
     userData.on("child_added", function(snap) {
       var sharedPin = snap.val();
 
@@ -55,6 +55,7 @@ export default function(pin, newTitle) {
         }
     });
 
+  //dispatches the action that updates pins to the most updated snap in db
     userData.on("value", function(snap) {
       dispatch(updatePins(snap.val()));
     });
