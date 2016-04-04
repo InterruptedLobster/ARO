@@ -6,7 +6,7 @@ export let user = ref.child('anonymous');
 export let userData = user.child('pins');
 export let userRecent = user.child('recent');
 
-
+//changes ref in db to point to specific user, used in login
 export const changeUser = function( uid ) {
   if( typeof uid !== 'string' ) {
     console.error( 'uid must have typeof string in changeUser( uid )' );
@@ -16,4 +16,4 @@ export const changeUser = function( uid ) {
     myCurrLoc = currLoc.child( uid );
     userData = user.child( 'pins' );
     userRecent = user.child( 'recent' );
-}
+};

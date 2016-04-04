@@ -9,7 +9,7 @@ import clearTarget from '../actions/action_setTarget';
 import setTarget from '../actions/action_setTarget';
 import ViewContainer from '../components/ViewContainer';
 
-
+//container that handles all of the redux store logic pertaining to the views
 function mapStateToProps(state) {
   return {
     pins: state.pins,

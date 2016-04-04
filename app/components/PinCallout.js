@@ -3,7 +3,8 @@ import React, {
   View,
   Text
 } from 'react-native';
-
+//this is the pin callout that pops up when user presses on pin
+//renders that title of pin
 export const PinCallout = React.createClass({
   render() {
     return (

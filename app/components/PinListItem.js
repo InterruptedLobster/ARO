@@ -11,6 +11,24 @@ import React, {
 import { Actions } from 'react-native-router-flux';
 import Location from '../lib/orientation/locationMath';
 
+/*
+FUNCTION: each pin displayed as an entry in the list
+METHODS:
+  toughOptions-- function that pops open, displaying the different actions a user can do with the pins
+    allows deleting, sharing, setting target, editing title
+PROPS:
+  pin: obj with longidtude, latitude, title, and id
+  friends: nested objects; with friend's user id as key storing object with name, id, and picture
+  deletePin: function responsible for deleting pin from store and db
+    takes in pin (see above for obj structure)
+  setTarget: function responsible for setting targetPin, takes in coords obj
+  redraw: function responsible that forces pinlist to re-render, solves rendering issue when going between pages
+  shareWithFriend: function responsible for sharing current pin with friend, will post to their db
+  updatePins: function responsible for updating the state of pins
+  updateRecent: function responsible for syncing redux store's recent array with updated db
+  currLoc: obj with longitude, latitude that is fetched in PinList and passed down as props
+  targetPin: nested object with longitude, latitude, and id
+*/
 
 export default class PinListItem extends Component {
 

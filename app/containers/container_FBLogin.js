@@ -1,8 +1,6 @@
 import React, {
   Component,
   StyleSheet,
-  Image,
-  Text,
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -12,6 +10,8 @@ import { Actions } from 'react-native-router-flux';
 import { changeUser } from '../lib/db/db';
 import FBLogin from 'react-native-facebook-login';
 
+//log in component through imported module that deals with log in, error, and log out
+//each prop inside component is an event handler
 
 class LogIn extends Component {
   constructor(props){
@@ -26,16 +26,18 @@ class LogIn extends Component {
         <FBLogin style={{ marginBottom: 10, }}
           permissions={["email","user_friends"]}
           onLogin={function(data){
-            //upon successful log in to fb
+            //upon successful log in to fb, change db ref to specific user, route to view,
+            //and dispatch action which updates the store
             changeUser(data.credentials.userId)
             Actions.view();
             action.firebase_check(data.credentials);
           }}
           onLogout={function(){
+            //upon logout, dispatch log out action
             action.logOut();
           }}
           onLoginFound={function(data){
-            //if user was already signed in this will exec
+            //if user was already signed in this will execute
             changeUser(data.credentials.userId)
             Actions.view();
             action.firebase_check(data.credentials);

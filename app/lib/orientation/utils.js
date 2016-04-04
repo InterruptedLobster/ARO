@@ -35,4 +35,3 @@ export const clearWatch = (watchID) => {
     watchID
   );
 };
-

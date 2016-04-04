@@ -11,12 +11,15 @@ function dropNewPin(payload, id) {
     payload
   };
 }
+
 function setRecent(payload) {
   return {
     type: SET_RECENT,
     payload
   };
 }
+
+//checks length of recent pins array in store
 function checkRecent(current = [], id) {
   var updated;
   if(!Array.isArray(current)) {
@@ -32,7 +35,22 @@ function checkRecent(current = [], id) {
   }
 }
 
-export default function getLocationToSave(location, current, pinTitle) {
+/* getLocationToSave is the called anytime a pin is dropped by one of two ways
+1) when user drops pin by clicking on map, location is passed in when invoked
+location is a coords obj w long, lat.
+
+2) when user drops pin by pressing button, location is omitted and getLocationToSave
+will fetch user's current location.
+
+prevRecent is the previous recent array, we pass this in so checkRecent can
+produce a new recent array
+
+pinTitle is what the user names the pin when dropping by clicking on map.
+*/
+
+export default function getLocationToSave(location, prevRecent, pinTitle) {
+
+  //abstracted helper function for pins saved through clicking anywhere on map or dropping on current location
   function getLocationHelper(loc, title, dispatch){
     let recent;
     loc.title = title;
@@ -45,8 +63,9 @@ export default function getLocationToSave(location, current, pinTitle) {
     // set the target to the most recently dropped pin
     dispatch(setTarget(loc));
     // this updates the recent pins state
-    recent = checkRecent(current, loc.id);
+    recent = checkRecent(prevRecent, loc.id);
     dispatch(setRecent(recent));
+    //this updates recent in db
     userRecent.set(recent);
   }
   return (dispatch) => {

@@ -147,6 +147,15 @@ const BRIDGE_INJECT_SCRIPT = `
   });
 `;
 
+/*
+FUNCTION: augmented reality view that displays pins using threejs models upon the camera layer
+METHODS:
+  calculateLocs(currentLocation, objectOfPins)-- function responsible for calculating relative x and z for each pin
+    objectOfPins- which is pins from store, nested object with keys of pin id and id, longitude, latitude and title
+  sendLocsToBridge(coordinates)-- event handler that takes in coords obj with longitude and latitude,
+    responsible for sending webViewBridge the stringified message so that the threeJS camera openGLlayer and camera webGL layer can work together
+  onBridgeMessage(message)-- handles the event when bridge is ready to receive message and will call sendLocsToBridge to communicate to the webviewlayer
+*/
 export default class AR extends Component {
   constructor(props) {
     super(props);

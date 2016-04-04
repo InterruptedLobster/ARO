@@ -2,6 +2,23 @@ import React, { Component, AlertIOS , View, StyleSheet} from 'react-native';
 import Button from 'react-native-button';
 import { Actions } from 'react-native-router-flux';
 
+/*
+FUNCTION: button that will pop up when user clicks pin on map
+  provides option to the user to manipulate pin (delete, set as target ...etc)
+METHODS:
+  editTitle(value)
+    expects a string, which the user passes in when editing a pin title
+    calls actions which updates pins with new title
+PROPS:
+  pin-- object with longitude, latitude, title
+  updatePins-- function responsible for syncing redux store's pins with updated db
+  updateRecent-- function responsible for syncing redux store's recent array with updated db
+  deletePin-- function that deletes pin in db and redux store
+  friends--  nested objects; with friend's user id as key storing object with name, id, and picture
+  setTarget--  function responsible for setting current pin as the targetPin in redux store
+  shareWithFriend-- function responsible for sharing current pin with friend, will post to their db
+*/
+
 export default class PinEditButton extends Component{
   constructor(props) {
     super(props);
@@ -9,13 +26,13 @@ export default class PinEditButton extends Component{
 
   editTitle(value) {
     const { pin, updatePins, updateRecent } = this.props;
-    
+
     updatePins(pin, value);
     updateRecent();
   }
 
   render() {
-    const { pin, deletePin, friends, hideButton, setTarget, shareWithFriend } = this.props;
+    const { pin, deletePin, friends, setTarget, shareWithFriend } = this.props;
     return(
       <Button
         style={[styles.bubble, styles.button]}
@@ -51,7 +68,7 @@ export default class PinEditButton extends Component{
             }],
             'plain-text'
           )}}>
-        EDIT PIN</Button>
+        Edit Pin</Button>
     )
   }
 }

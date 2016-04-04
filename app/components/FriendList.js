@@ -5,11 +5,16 @@ import React, {
   StyleSheet,
   Text
 } from 'react-native';
-
 import Button from 'react-native-button';
 import { Actions } from 'react-native-router-flux';
 import FriendListItem from './FriendListItem';
 
+/*
+FUNCTION: shows list of FB friends that use the app
+  maps each friend as a FriendListItem component
+PROPS:
+  onPress-- function that passes down what happens upon pressing on friend
+*/
 export default class FriendList extends Component {
 
   constructor(props) {

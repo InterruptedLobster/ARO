@@ -6,15 +6,16 @@ function deletePin(selectedPin) {
     type: DELETE_PIN,
     payload: selectedPin
   };
-};
+}
 
 function updateRecent(payload) {
   return {
     type: UPDATE_RECENT,
     payload
-  }
+  };
 }
 
+//when user deletes pin it also deletes pin from redux store's recent
 function deleteRecentPin(selectedPin, dispatch) {
   let newRecent;
   userRecent.once("value", (snapshot) => {
@@ -33,6 +34,7 @@ function deleteRecentPin(selectedPin, dispatch) {
   });
 }
 
+//finds the pin in db and calls action to delete from store
 export default function (pin) {
     userData.child(pin.id).remove();
   return (dispatch) => {
